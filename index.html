@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arcane Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d0b08;
+      color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      border-bottom: 1px solid rgba(184,146,42,0.2);
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: #b8922a;
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+    nav ul a {
+      color: #9c8e7a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    nav ul a:hover { color: #f5efe6; }
+    nav .signin {
+      background: #b8922a;
+      color: #0d0b08;
+      padding: 10px 24px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* HERO */
+    .hero {
+      /* Replace img1.jpg with your hero image */
+      background: url('img1.jpg') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,11,8,0.65);
+    }
+    .hero-content {
+      position: relative;
+      max-width: 700px;
+      padding: 0 20px;
+    }
+    .hero-content p {
+      font-size: 0.8rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #b8922a;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-content h1 em { color: #d4a94a; }
+    .hero-content span {
+      display: block;
+      color: #ede4d4;
+      margin-bottom: 36px;
+      font-size: 1.1rem;
+    }
+    .hero-content a {
+      background: #b8922a;
+      color: #0d0b08;
+      padding: 14px 36px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .about-img {
+      /* Replace img2.jpg with your interior image */
+      background: url('img2.jpg') center/cover no-repeat;
+      min-height: 500px;
+    }
+    .about-text {
+      background: #1a1409;
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .about-text p.label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #b8922a;
+      margin-bottom: 16px;
+    }
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+    .about-text h2 em { color: #d4a94a; }
+    .about-text p {
+      color: #9c8e7a;
+      line-height: 1.85;
+    }
+
+    /* BOOKS */
+    .books {
+      padding: 80px 50px;
+    }
+    .books h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(184,146,42,0.2);
+      padding-bottom: 16px;
+    }
+    .books h2 em { color: #d4a94a; }
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .book-card { cursor: pointer; }
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: #2e2314 center/cover no-repeat;
+      margin-bottom: 14px;
+    }
+
+    .book-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .book-card .author { color: #9c8e7a; font-size: 0.85rem; font-style: italic; margin-bottom: 8px; }
+
+
+    /* QUOTE BANNER */
+    .banner {
+      /* Replace img7.jpg with a moody library image */
+      background: url('img7.jpg') center/cover no-repeat;
+      position: relative;
+      padding: 100px 80px;
+    }
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,11,8,0.78);
+    }
+    .banner-content {
+      position: relative;
+      max-width: 560px;
+    }
+    .banner-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+    .banner-content h2 em { color: #d4a94a; }
+    .banner-content p { color: #9c8e7a; }
+
+    /* FOOTER */
+    footer {
+      background: #1a1409;
+      padding: 50px;
+      border-top: 1px solid rgba(184,146,42,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    footer .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #b8922a;
+    }
+    footer p { color: #9c8e7a; font-size: 0.85rem; }
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+    }
+    footer ul a { color: #9c8e7a; text-decoration: none; font-size: 0.85rem; }
+    footer ul a:hover { color: #f5efe6; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hero-content h1 { font-size: 2.4rem; }
+      .about { grid-template-columns: 1fr; }
+      .book-grid { grid-template-columns: 1fr 1fr; }
+      .books, .banner, footer { padding: 50px 24px; }
+      nav { padding: 18px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="logo" href="#">Arcane Books</a>
+    <ul>
+      <li><a href="#">Catalogue</a></li>
+      <li><a href="#">Borrow</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="login.html" class="signin">Sign In</a>
+  </nav>
+
+  <!-- HERO — replace img1.jpg -->
+  <section class="hero"  style="background-image: url(img/lib_bg.jpg);">
+    <div class="hero-content">
+      <p>Est. 2024 · Curated Editions</p>
+      <h1>Where <em>Knowledge</em> Finds Its Home</h1>
+      <span>Borrow, explore, and discover — your university library, online.</span>
+      <a href="#">Browse Catalogue</a>
+    </div>
+  </section>
+
+  <!-- ABOUT — replace img2.jpg -->
+  <section class="about">
+    <div class="about-img"></div>
+    <div class="about-text">
+      <p class="label">Our Philosophy</p>
+      <h2>An <em>Intellectual</em> Refuge</h2>
+      <p>Founded on the belief that every great book is an invitation across centuries. We curate works that endure — philosophy, literature, history, and the arts.</p>
+    </div>
+  </section>
+
+  <!-- BOOKS — replace img3.jpg to img6.jpg -->
+  <section class="books">
+    <h2>Available <em>Books</em></h2>
+    <div class="book-grid">
+      <div class="book-card">
+        <div class="book-cover" style="background-image: url('img3.jpg');"></div>
+        <h3>Meditations</h3>
+        <p class="author">Marcus Aurelius</p>
+      </div>
+      <div class="book-card">
+        <div class="book-cover" style="background-image: url('img4.jpg');"></div>
+        <h3>The Name of the Rose</h3>
+        <p class="author">Umberto Eco</p>
+      </div>
+      <div class="book-card">
+        <div class="book-cover" style="background-image: url('img5.jpg');"></div>
+        <h3>Foucault's Pendulum</h3>
+        <p class="author">Umberto Eco</p>
+      </div>
+      <div class="book-card">
+        <div class="book-cover" style="background-image: url('img6.jpg');"></div>
+        <h3>Sapiens</h3>
+        <p class="author">Yuval Noah Harari</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BANNER — replace img7.jpg -->
+  <section class="banner">
+    <div class="banner-content">
+      <h2>"A room without books is like a body <em>without a soul."</em></h2>
+      <p>— Marcus Tullius Cicero</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo">Arcane Books</span>
+    <ul>
+      <li><a href="#">Catalogue</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <p>© 2024 Arcane Books. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
