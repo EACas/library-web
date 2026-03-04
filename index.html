@@ -119,6 +119,10 @@
       text-transform: uppercase;
     }
 
+    .divider{
+      padding: 60px;
+    }
+
     /* ABOUT */
     .about {
       display: grid;
@@ -152,10 +156,6 @@
     .about-text p {
       color: #9c8e7a;
       line-height: 1.85;
-    }
-
-    .divider{
-      padding: 60px;
     }
 
     /* BOOKS */
@@ -224,23 +224,35 @@
       border-top: 1px solid rgba(184,146,42,0.15);
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 40px;
     }
     footer .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.3rem;
       color: #b8922a;
+      display: block;
+      margin-bottom: 8px;
     }
     footer p { color: #9c8e7a; font-size: 0.85rem; }
-    footer ul {
-      list-style: none;
-      display: flex;
-      gap: 24px;
+    .footer-heading {
+      font-size: 0.7rem !important;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #b8922a !important;
+      margin-bottom: 12px;
     }
-    footer ul a { color: #9c8e7a; text-decoration: none; font-size: 0.85rem; }
-    footer ul a:hover { color: #f5efe6; }
+    .footer-contact p { margin-bottom: 8px; font-size: 0.9rem !important; }
+    .footer-contact a { color: #9c8e7a; text-decoration: none; }
+    .footer-contact a:hover { color: #f5efe6; }
+    /* Social buttons */
+    .social-links { display: flex; flex-direction: column; gap: 10px; }
+    .social-btn {
+      display: flex; align-items: center; gap: 10px;
+      color: #9c8e7a; text-decoration: none; font-size: 0.9rem;
+    }
+    .social-btn:hover { color: #b8922a; }
 
     /* MOBILE */
     @media (max-width: 768px) {
@@ -259,9 +271,9 @@
   <nav>
     <a class="logo" href="index.html">Book Library</a>
     <ul>
-      <li><a href="#">Catalogue</a></li>
-      <li><a href="#">Borrow</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-btns">
       <a href="pages/register.html" class="register">Register</a>
@@ -269,20 +281,20 @@
     </div>
   </nav>
 
-  <!-- title section -->
+  <!-- HERO -->
   <section class="hero" style="background-image: url(img/lib_bg.jpg);">
     <div class="hero-content">
       <p>Est. 2024 · Curated Editions</p>
       <h1>Where <em>Knowledge</em> Finds Its Home</h1>
       <span>Borrow, explore, and discover — your university library, online.</span>
-      <a href="#">Browse Catalogue</a>
+      <a href="#catalogue">Browse Catalogue</a>
     </div>
   </section>
 
   <section class="divider"></section>
 
-  <!-- about section -->
-  <section class="about" style="background-image: url(img/img1.jpg);">
+  <!-- ABOUT -->
+  <section class="about" id="about" style="background-image: url(img/img1.jpg);">
     <div class="about-img"></div>
     <div class="about-text">
       <p class="label">Our Philosophy</p>
@@ -291,8 +303,8 @@
     </div>
   </section>
 
-  <!-- available books section -->
-  <section class="books">
+  <!-- BOOKS -->
+  <section class="books" id="catalogue">
     <h2>Available <em>Books</em></h2>
     <div class="book-grid">
       <div class="book-card">
@@ -318,7 +330,7 @@
     </div>
   </section>
 
-  <!-- QUOTE BANNER — replace img7.jpg -->
+  <!-- QUOTE BANNER -->
   <section class="banner" style="background-image: url(img/banner.jpg);">
     <div class="banner-content">
       <h2>"A room without books is like a body <em>without a soul."</em></h2>
@@ -327,14 +339,48 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <span class="logo">Book Library</span>
-    <ul>
-      <li><a href="#">Catalogue</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <p>© 2024 Book Library. All rights reserved.</p>
+  <footer id="contact">
+    <!-- Left: Logo + copyright -->
+    <div class="footer-left">
+      <span class="logo">Book Library</span>
+      <p>© 2024 Book Library. All rights reserved.</p>
+    </div>
+
+    <!-- Middle: Contact info -->
+    <div class="footer-contact">
+      <p class="footer-heading">Contact Us</p>
+      <p>
+        <!-- Email icon (simple unicode) -->
+        ✉ <a href="mailto:booklibrary@gmail.com">booklibrary@gmail.com</a>
+      </p>
+      <p>
+        <!-- Phone icon -->
+        ✆ <a href="tel:+5016509245">+501 650-9245</a>
+      </p>
+    </div>
+
+    <!-- Right: Social media -->
+    <div class="footer-social">
+      <p class="footer-heading">Follow Us</p>
+      <div class="social-links">
+        <!-- Instagram -->
+        <a href="#" class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="social-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+          Facebook
+        </a>
+      </div>
+    </div>
   </footer>
 
 </body>
