@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — System Config</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d0b08; color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 18px; display: flex; }
+
+    .sidebar { width: 240px; min-height: 100vh; background: #1a1409; border-right: 1px solid rgba(184,146,42,0.2); padding: 30px 0; position: fixed; top: 0; left: 0; }
+    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #b8922a; padding: 0 24px 30px; display: block; border-bottom: 1px solid rgba(184,146,42,0.2); }
+    .sidebar .role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #9c8e7a; padding: 20px 24px 6px; }
+    .sidebar a { display: block; padding: 12px 24px; color: #9c8e7a; text-decoration: none; font-size: 0.95rem; border-left: 3px solid transparent; }
+    .sidebar a:hover, .sidebar a.active { color: #f5efe6; background: rgba(184,146,42,0.08); border-left-color: #b8922a; }
+    .sidebar .logout { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 24px; }
+    .sidebar .logout a { color: #7a1f1f; border-left: none; padding: 0; font-size: 0.85rem; }
+
+    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+    .page-title em { color: #d4a94a; font-style: italic; }
+    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
+
+    .section { margin-bottom: 44px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; border-bottom: 1px solid rgba(184,146,42,0.2); padding-bottom: 12px; margin-bottom: 24px; }
+    .section h2 em { color: #d4a94a; font-style: italic; }
+
+    /* CONFIG ROWS */
+    .config-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #1a1409; border: 1px solid rgba(184,146,42,0.12);
+      padding: 20px 24px; margin-bottom: 12px;
+    }
+    .config-row .config-label { font-size: 1rem; color: #f5efe6; }
+    .config-row .config-desc  { font-size: 0.82rem; color: #9c8e7a; margin-top: 4px; }
+    .config-row input[type="number"] {
+      width: 80px; padding: 8px 12px; background: #0d0b08;
+      border: 1px solid rgba(184,146,42,0.25); color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+      outline: none; text-align: center;
+    }
+
+    .btn { padding: 10px 24px; border: none; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .btn-gold { background: #b8922a; color: #0d0b08; }
+    .btn-dark { background: #2e2314; color: #f5efe6; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th { text-align: left; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9c8e7a; border-bottom: 1px solid rgba(184,146,42,0.2); padding: 10px 14px; }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ede4d4; }
+    tr:hover td { background: rgba(184,146,42,0.05); }
+
+    .badge { display: inline-block; padding: 3px 10px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge.borrow  { background: rgba(184,146,42,0.2); color: #d4a94a; }
+    .badge.return  { background: rgba(42,122,42,0.2);  color: #70c070; }
+    .badge.overdue { background: rgba(122,31,31,0.25); color: #e07070; }
+
+    .save-bar { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Admin Panel</p>
+    <a href="admin_dashboard.html">Dashboard</a>
+    <a href="admin_users.html">User Management</a>
+    <a href="admin_config.html" class="active">System Config</a>
+    <a href="admin_reports.html">Reports</a>
+    <div class="logout"><a href="login.html">Log Out</a></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <h1 class="page-title">System <em>Configuration</em></h1>
+    <p class="page-sub">Set borrowing rules and review activity logs</p>
+
+    <!-- BORROWING LIMITS -->
+    <div class="section">
+      <h2>Borrowing <em>Limits</em></h2>
+
+      <div class="config-row">
+        <div>
+          <p class="config-label">Max Books per Student</p>
+          <p class="config-desc">How many books a student can borrow at once</p>
+        </div>
+        <input type="number" value="3" min="1" max="10" />
+      </div>
+
+      <div class="config-row">
+        <div>
+          <p class="config-label">Borrow Duration (days)</p>
+          <p class="config-desc">How many days before a book is overdue</p>
+        </div>
+        <input type="number" value="14" min="1" max="60" />
+      </div>
+
+      <div class="config-row">
+        <div>
+          <p class="config-label">Fine per Overdue Day ($)</p>
+          <p class="config-desc">Amount charged per day past due date</p>
+        </div>
+        <input type="number" value="0.50" min="0" step="0.10" />
+      </div>
+
+      <div class="save-bar">
+        <button class="btn btn-gold">Save Settings</button>
+      </div>
+    </div>
+
+    <!-- ACTIVITY LOGS -->
+    <div class="section">
+      <h2>System Activity <em>Logs</em></h2>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Student</th><th>Book</th><th>Action</th><th>Librarian</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nov 13, 2024</td><td>John Doe</td><td>Meditations</td><td><span class="badge borrow">Borrowed</span></td><td>Anna Smith</td></tr>
+          <tr><td>Nov 12, 2024</td><td>Maria Lopez</td><td>Sapiens</td><td><span class="badge return">Returned</span></td><td>Anna Smith</td></tr>
+          <tr><td>Nov 11, 2024</td><td>James Lee</td><td>The Republic</td><td><span class="badge overdue">Overdue Fine</span></td><td>Carlos Reyes</td></tr>
+          <tr><td>Nov 10, 2024</td><td>Sara Khan</td><td>Name of the Rose</td><td><span class="badge borrow">Borrowed</span></td><td>Anna Smith</td></tr>
+          <tr><td>Nov 9, 2024</td><td>Tom Brown</td><td>Foucault's Pendulum</td><td><span class="badge return">Returned</span></td><td>Carlos Reyes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

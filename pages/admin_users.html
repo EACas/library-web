@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin — User Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d0b08; color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 18px; display: flex; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px; min-height: 100vh; background: #1a1409;
+      border-right: 1px solid rgba(184,146,42,0.2);
+      padding: 30px 0; position: fixed; top: 0; left: 0;
+    }
+    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #b8922a; padding: 0 24px 30px; display: block; border-bottom: 1px solid rgba(184,146,42,0.2); }
+    .sidebar .role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #9c8e7a; padding: 20px 24px 6px; }
+    .sidebar a { display: block; padding: 12px 24px; color: #9c8e7a; text-decoration: none; font-size: 0.95rem; border-left: 3px solid transparent; }
+    .sidebar a:hover, .sidebar a.active { color: #f5efe6; background: rgba(184,146,42,0.08); border-left-color: #b8922a; }
+    .sidebar .logout { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 24px; }
+    .sidebar .logout a { color: #7a1f1f; border-left: none; padding: 0; font-size: 0.85rem; }
+
+    /* MAIN */
+    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+    .page-title em { color: #d4a94a; font-style: italic; }
+    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
+
+    /* TOP BAR */
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .search-input {
+      padding: 10px 16px; background: #1a1409;
+      border: 1px solid rgba(184,146,42,0.2); color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem;
+      outline: none; width: 280px;
+    }
+    .search-input::placeholder { color: #9c8e7a; }
+    .btn {
+      padding: 10px 24px; border: none; cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .btn-gold  { background: #b8922a; color: #0d0b08; }
+    .btn-dark  { background: #2e2314; color: #f5efe6; }
+    .btn-red   { background: rgba(122,31,31,0.3); color: #e07070; }
+
+    /* SECTION */
+    .section { margin-bottom: 40px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; border-bottom: 1px solid rgba(184,146,42,0.2); padding-bottom: 12px; margin-bottom: 20px; }
+    .section h2 em { color: #d4a94a; font-style: italic; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th { text-align: left; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9c8e7a; border-bottom: 1px solid rgba(184,146,42,0.2); padding: 10px 14px; }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ede4d4; }
+    tr:hover td { background: rgba(184,146,42,0.05); }
+
+    .badge { display: inline-block; padding: 3px 10px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge.active    { background: rgba(42,122,42,0.2);  color: #70c070; }
+    .badge.suspended { background: rgba(122,31,31,0.25); color: #e07070; }
+
+    .action-btns { display: flex; gap: 8px; }
+
+    /* MODAL OVERLAY */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(13,11,8,0.85); z-index: 100; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal { background: #1a1409; border: 1px solid rgba(184,146,42,0.25); padding: 36px 40px; width: 440px; }
+    .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 24px; }
+    .modal h3 em { color: #d4a94a; font-style: italic; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9c8e7a; margin-bottom: 6px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 10px 14px; background: #0d0b08;
+      border: 1px solid rgba(184,146,42,0.2); color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none;
+    }
+    .form-group select option { background: #1a1409; }
+    .modal-btns { display: flex; gap: 12px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Admin Panel</p>
+    <a href="admin-dashboard.html">Dashboard</a>
+    <a href="admin-users.html" class="active">User Management</a>
+    <a href="admin-config.html">System Config</a>
+    <a href="admin-reports.html">Reports</a>
+    <div class="logout"><a href="login.html">Log Out</a></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <h1 class="page-title">User <em>Management</em></h1>
+    <p class="page-sub">Manage librarian and student accounts</p>
+
+    <!-- LIBRARIANS -->
+    <div class="section">
+      <h2>Librarian <em>Accounts</em></h2>
+      <div class="top-bar">
+        <input class="search-input" type="text" placeholder="Search librarians..." />
+        <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Add Librarian</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Date Added</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anna Smith</td><td>anna@library.edu</td><td>Jan 10, 2024</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">Edit</button>
+              <button class="btn btn-red">Suspend</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>Carlos Reyes</td><td>carlos@library.edu</td><td>Mar 5, 2024</td>
+            <td><span class="badge suspended">Suspended</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">Edit</button>
+              <button class="btn btn-gold">Reactivate</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- STUDENTS -->
+    <div class="section">
+      <h2>Student <em>Accounts</em></h2>
+      <div class="top-bar">
+        <input class="search-input" type="text" placeholder="Search students..." />
+        <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Add Student</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Student ID</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td><td>STU-001</td><td>john@uni.edu</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">Edit</button>
+              <button class="btn btn-red">Suspend</button>
+              <button class="btn btn-red">Delete</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>Maria Lopez</td><td>STU-002</td><td>maria@uni.edu</td>
+            <td><span class="badge active">Active</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">Edit</button>
+              <button class="btn btn-red">Suspend</button>
+              <button class="btn btn-red">Delete</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADD USER MODAL -->
+  <div class="modal-bg" id="addModal">
+    <div class="modal">
+      <h3>Add New <em>User</em></h3>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="e.g. Anna Smith" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="user@library.edu" />
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select>
+          <option>Librarian</option>
+          <option>Student</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="••••••••" />
+      </div>
+      <div class="modal-btns">
+        <button class="btn btn-gold">Save</button>
+        <button class="btn btn-dark" onclick="document.getElementById('addModal').classList.remove('open')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Librarian — Library Operations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d0b08; color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 18px; display: flex; }
+
+    .sidebar { width: 240px; min-height: 100vh; background: #1a1409; border-right: 1px solid rgba(184,146,42,0.2); padding: 30px 0; position: fixed; top: 0; left: 0; }
+    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #b8922a; padding: 0 24px 30px; display: block; border-bottom: 1px solid rgba(184,146,42,0.2); }
+    .sidebar .role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #9c8e7a; padding: 20px 24px 6px; }
+    .sidebar a { display: block; padding: 12px 24px; color: #9c8e7a; text-decoration: none; font-size: 0.95rem; border-left: 3px solid transparent; }
+    .sidebar a:hover, .sidebar a.active { color: #f5efe6; background: rgba(184,146,42,0.08); border-left-color: #b8922a; }
+    .sidebar .logout { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 24px; }
+    .sidebar .logout a { color: #7a1f1f; border-left: none; padding: 0; font-size: 0.85rem; }
+
+    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+    .page-title em { color: #d4a94a; font-style: italic; }
+    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
+
+    .section { margin-bottom: 44px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; border-bottom: 1px solid rgba(184,146,42,0.2); padding-bottom: 12px; margin-bottom: 20px; }
+    .section h2 em { color: #d4a94a; font-style: italic; }
+
+    .top-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .search-input { padding: 10px 16px; background: #1a1409; border: 1px solid rgba(184,146,42,0.2); color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none; width: 240px; }
+    .search-input::placeholder { color: #9c8e7a; }
+
+    .btn { padding: 10px 24px; border: none; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .btn-gold  { background: #b8922a; color: #0d0b08; }
+    .btn-dark  { background: #2e2314; color: #f5efe6; }
+    .btn-red   { background: rgba(122,31,31,0.3); color: #e07070; }
+    .btn-green { background: rgba(42,122,42,0.3);  color: #70c070; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th { text-align: left; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9c8e7a; border-bottom: 1px solid rgba(184,146,42,0.2); padding: 10px 14px; }
+    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ede4d4; }
+    tr:hover td { background: rgba(184,146,42,0.05); }
+
+    .badge { display: inline-block; padding: 3px 10px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .badge.pending  { background: rgba(184,146,42,0.2);  color: #d4a94a; }
+    .badge.approved { background: rgba(42,122,42,0.2);   color: #70c070; }
+    .badge.denied   { background: rgba(122,31,31,0.25);  color: #e07070; }
+    .badge.active   { background: rgba(42,122,42,0.2);   color: #70c070; }
+    .badge.overdue  { background: rgba(122,31,31,0.25);  color: #e07070; }
+
+    .action-btns { display: flex; gap: 8px; }
+
+    /* TRANSACTION FORM */
+    .transaction-box {
+      background: #1a1409; border: 1px solid rgba(184,146,42,0.15);
+      padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .form-group { margin-bottom: 0; }
+    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9c8e7a; margin-bottom: 6px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 10px 14px; background: #0d0b08;
+      border: 1px solid rgba(184,146,42,0.2); color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none;
+    }
+    .form-group select option { background: #1a1409; }
+    .form-full { grid-column: 1 / -1; }
+    .form-btns { display: flex; gap: 12px; }
+
+    /* NOTIFICATION ITEM */
+    .notif-item {
+      background: #1a1409; border: 1px solid rgba(184,146,42,0.12);
+      padding: 18px 20px; margin-bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .notif-text p  { font-size: 1rem; color: #f5efe6; margin-bottom: 4px; }
+    .notif-text small { font-size: 0.8rem; color: #9c8e7a; }
+    .notif-dot { width: 8px; height: 8px; background: #b8922a; border-radius: 50%; flex-shrink: 0; margin-left: 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Librarian Panel</p>
+    <a href="librarian_books.html">Book Management</a>
+    <a href="librarian_students.html">Student Accounts</a>
+    <a href="librarian_operations.html" class="active">Library Operations</a>
+    <a href="librarian_notifications.html">Notifications</a>
+    <div class="logout"><a href="login.html">Log Out</a></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <h1 class="page-title">Library <em>Operations</em></h1>
+    <p class="page-sub">Manage borrowing, returns, reservations and fines</p>
+
+    <!-- BORROW / RETURN TRANSACTION -->
+    <div class="section">
+      <h2>Process Borrow <em>&amp; Return</em></h2>
+      <div class="transaction-box">
+        <div class="form-group">
+          <label>Student ID or Name</label>
+          <input type="text" placeholder="e.g. STU-001 or John Doe" />
+        </div>
+        <div class="form-group">
+          <label>Book Title or ISBN</label>
+          <input type="text" placeholder="e.g. Meditations" />
+        </div>
+        <div class="form-group">
+          <label>Transaction Type</label>
+          <select><option>Borrow</option><option>Return</option></select>
+        </div>
+        <div class="form-group">
+          <label>Due Date</label>
+          <input type="date" />
+        </div>
+        <div class="form-full form-btns">
+          <button class="btn btn-gold">Process Transaction</button>
+          <button class="btn btn-dark">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESERVATIONS -->
+    <div class="section">
+      <h2>Book <em>Reservations</em></h2>
+      <table>
+        <thead>
+          <tr><th>Student</th><th>Book</th><th>Reserved On</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td><td>The Republic</td><td>Nov 10, 2024</td>
+            <td><span class="badge pending">Pending</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-green">Approve</button>
+              <button class="btn btn-red">Deny</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>Sara Khan</td><td>Sapiens</td><td>Nov 11, 2024</td>
+            <td><span class="badge approved">Approved</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">View</button>
+            </div></td>
+          </tr>
+          <tr>
+            <td>Tom Brown</td><td>Meditations</td><td>Nov 12, 2024</td>
+            <td><span class="badge denied">Denied</span></td>
+            <td><div class="action-btns">
+              <button class="btn btn-dark">View</button>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- APPLY FINES -->
+    <div class="section">
+      <h2>Apply <em>Fines</em></h2>
+      <table>
+        <thead>
+          <tr><th>Student</th><th>Book</th><th>Reason</th><th>Days Late</th><th>Fine</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td><td>Meditations</td><td>Overdue</td><td>12</td><td>$6.00</td>
+            <td><button class="btn btn-gold">Apply Fine</button></td>
+          </tr>
+          <tr>
+            <td>Maria Lopez</td><td>Sapiens</td><td>Damaged</td><td>—</td><td>$15.00</td>
+            <td><button class="btn btn-gold">Apply Fine</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="section">
+      <h2>Sent <em>Notifications</em></h2>
+      <div class="notif-item">
+        <div class="notif-text">
+          <p>Due date reminder sent to John Doe</p>
+          <small>Meditations — due in 2 days · Nov 13, 2024</small>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="notif-item">
+        <div class="notif-text">
+          <p>Reserved book now available — Sara Khan notified</p>
+          <small>Sapiens is now available · Nov 12, 2024</small>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="notif-item">
+        <div class="notif-text">
+          <p>Overdue notice sent to James Lee</p>
+          <small>The Republic — 5 days overdue · Nov 11, 2024</small>
+        </div>
+        <div class="notif-dot"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
