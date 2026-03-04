@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Book Library — Sign In</title>
+  <title>Book Library — Register</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,7 +11,7 @@
     body {
       font-family: 'Cormorant Garamond', serif;
       font-size: 18px;
-      height: 100vh;
+      min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
@@ -68,7 +68,8 @@
       color: #0d0b08;
       margin-bottom: 6px;
     }
-    .form-box input {
+    .form-box input,
+    .form-box select {
       width: 100%;
       padding: 12px 14px;
       border: 1px solid rgba(13,11,8,0.2);
@@ -80,19 +81,9 @@
       outline: none;
       margin-bottom: 20px;
     }
-    .form-box input:focus { border-color: #b8922a; }
+    .form-box input:focus,
+    .form-box select:focus { border-color: #b8922a; }
     .form-box input::placeholder { color: #9c8e7a; }
-
-    .form-box .forgot {
-      display: block;
-      text-align: right;
-      font-size: 0.85rem;
-      font-style: italic;
-      color: #7a1f1f;
-      text-decoration: none;
-      margin-top: -12px;
-      margin-bottom: 28px;
-    }
 
     /* BUTTONS */
     .btn-main {
@@ -108,37 +99,14 @@
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .btn-google {
-      width: 100%;
-      padding: 12px;
-      background: transparent;
-      color: #0d0b08;
-      border: 1.5px solid rgba(13,11,8,0.2);
-      cursor: pointer;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .btn-google svg { width: 18px; height: 18px; }
 
-    .divider {
-      text-align: center;
-      color: #9c8e7a;
-      font-size: 0.8rem;
-      margin: 14px 0;
-    }
-
-    .signup {
+    .signin {
       text-align: center;
       margin-top: 24px;
       font-size: 0.9rem;
       color: #9c8e7a;
     }
-    .signup a { color: #7a1f1f; font-style: italic; text-decoration: none; }
+    .signin a { color: #7a1f1f; font-style: italic; text-decoration: none; }
 
     /* RIGHT SIDE — IMAGE PANEL */
     .right {
@@ -193,9 +161,21 @@
     <a href="index.html" class="back">← Back to library</a>
 
     <div class="form-box">
-      <p class="label">Member Access</p>
-      <h1>Welcome <em>Back</em></h1>
-      <p class="subtitle">Sign in to access your library.</p>
+      <p class="label">New Member</p>
+      <h1>Create <em>Account</em></h1>
+      <p class="subtitle">Register to access the library.</p>
+
+      <!-- Role — moved here from login -->
+      <label for="role">I am a</label>
+      <select id="role">
+        <option value="">Select your role...</option>
+        <option value="student">Student</option>
+        <option value="librarian">Librarian</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="e.g. John Doe" />
 
       <label for="email">Email</label>
       <input type="email" id="email" placeholder="your@email.com" />
@@ -203,40 +183,44 @@
       <label for="password">Password</label>
       <input type="password" id="password" placeholder="••••••••" />
 
-      <a href="#" class="forgot">Forgot password?</a>
+      <label for="confirm">Confirm Password</label>
+      <input type="password" id="confirm" placeholder="••••••••" />
 
-      <button class="btn-main" onclick="handleLogin()">Sign In</button>
+      <button class="btn-main" onclick="handleRegister()">Create Account</button>
 
-      <div class="divider">or</div>
-
-      <button class="btn-google">G &nbsp; Sign in with Google</button>
-
-      <p class="signup">Don't have an account? <a href="register.html">Register here</a></p>
+      <p class="signin">Already have an account? <a href="login.html">Sign in here</a></p>
     </div>
   </div>
 
-  <!-- RIGHT: IMAGE PANEL — replace img1.jpg -->
+  <!-- RIGHT: IMAGE PANEL -->
   <div class="right">
     <div class="right-content">
       <div class="quote-card">
         <div class="stars">★★★★★</div>
-        <blockquote>"Every visit to Book Library feels like stepping into another era. Their curation is impeccable."</blockquote>
-        <p class="name">Eleanor V.</p>
-        <p class="role">Collector & Reader, London</p>
+        <blockquote>"Joining Book Library opened up a whole world of knowledge I never expected to find."</blockquote>
+        <p class="name">James L.</p>
+        <p class="role">Student, University of Belize</p>
       </div>
     </div>
   </div>
 
-
   <script>
-    function handleLogin() {
-      var role  = document.getElementById('role').value;
-      var email = document.getElementById('email').value;
-      var pass  = document.getElementById('password').value;
+    function handleRegister() {
+      var role     = document.getElementById('role').value;
+      var name     = document.getElementById('name').value;
+      var email    = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+      var confirm  = document.getElementById('confirm').value;
 
       /* Check all fields are filled */
-      if (!role || !email || !pass) {
-        alert('Please fill in all fields and select your role.');
+      if (!role || !name || !email || !password || !confirm) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      /* Check passwords match */
+      if (password !== confirm) {
+        alert('Passwords do not match.');
         return;
       }
 
@@ -246,5 +230,6 @@
       if (role === 'student')    window.location.href = 'student_library.html';
     }
   </script>
+
 </body>
 </html>

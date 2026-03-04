@@ -51,6 +51,21 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
     }
+    nav .register {
+      background: transparent;
+      color: #b8922a;
+      padding: 10px 24px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid #b8922a;
+    }
+    nav .nav-btns {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
     /* HERO */
     .hero {
@@ -248,23 +263,26 @@
       <li><a href="#">Borrow</a></li>
       <li><a href="#">About</a></li>
     </ul>
-    <a href="pages/login.html" class="signin">Sign In</a>
+    <div class="nav-btns">
+      <a href="pages/register.html" class="register">Register</a>
+      <a href="pages/login.html" class="signin">Sign In</a>
+    </div>
   </nav>
 
-  <!-- HERO — replace img1.jpg -->
+  <!-- title section -->
   <section class="hero" style="background-image: url(img/lib_bg.jpg);">
     <div class="hero-content">
       <p>Est. 2024 · Curated Editions</p>
       <h1>Where <em>Knowledge</em> Finds Its Home</h1>
-      <span>Explore and discover — your university library, online.</span>
+      <span>Borrow, explore, and discover — your university library, online.</span>
       <a href="#">Browse Catalogue</a>
     </div>
   </section>
 
   <section class="divider"></section>
 
-  <!-- ABOUT — replace img2.jpg -->
-  <section class="about" style="background-image: url(img/img.jpg);">
+  <!-- about section -->
+  <section class="about" style="background-image: url(img/img1.jpg);">
     <div class="about-img"></div>
     <div class="about-text">
       <p class="label">Our Philosophy</p>
@@ -273,7 +291,7 @@
     </div>
   </section>
 
-  <!-- BOOKS — replace img3.jpg to img6.jpg -->
+  <!-- available books section -->
   <section class="books">
     <h2>Available <em>Books</em></h2>
     <div class="book-grid">
@@ -301,7 +319,7 @@
   </section>
 
   <!-- QUOTE BANNER — replace img7.jpg -->
-  <section class="banner">
+  <section class="banner" style="background-image: url(img/banner.jpg);">
     <div class="banner-content">
       <h2>"A room without books is like a body <em>without a soul."</em></h2>
       <p>— Marcus Tullius Cicero</p>
