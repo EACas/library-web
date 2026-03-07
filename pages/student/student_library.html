@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student — My Library</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../styles/student_library.css" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Student Portal</p>
+    <a href="student_library.html" class="active">Browse Books</a>
+    <a href="student_account.html">My Account</a>
+    <div class="logout"><a href="login.html">Log Out</a></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <h1 class="page-title">Browse <em>Books</em></h1>
+    <p class="page-sub">Search, reserve and borrow from our collection</p>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat-card">
+        <p class="stat-label">Currently Borrowed</p>
+        <p class="stat-value">2</p>
+        <p class="stat-note">Max allowed: 3</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Reserved Books</p>
+        <p class="stat-value">1</p>
+        <p class="stat-note">Awaiting approval</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Outstanding Fines</p>
+        <p class="stat-value">$6.00</p>
+        <p class="stat-note">Due immediately</p>
+      </div>
+    </div>
+
+    <!-- SEARCH BOOKS -->
+    <div class="section">
+      <h2>Search <em>Catalogue</em></h2>
+      <div class="search-bar">
+        <input class="search-input" type="text" placeholder="Search by title, author, genre, year..." />
+        <select class="filter">
+          <option>All Genres</option>
+          <option>Philosophy</option>
+          <option>Literature</option>
+          <option>History</option>
+          <option>Science</option>
+          <option>Art</option>
+        </select>
+        <button class="btn btn-gold">Search</button>
+      </div>
+
+      <div class="book-grid">
+        <div class="book-card">
+          <div class="book-cover" style="background-image: url('img3.jpg');"></div>
+          <h3>Meditations</h3>
+          <p class="author">Marcus Aurelius</p>
+          <div class="status-row">
+            <span class="badge available">Available</span>
+            <button class="btn btn-gold" style="padding:6px 14px; font-size:0.75rem;">Borrow</button>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover" style="background-image: url('img4.jpg');"></div>
+          <h3>The Name of the Rose</h3>
+          <p class="author">Umberto Eco</p>
+          <div class="status-row">
+            <span class="badge borrowed">Borrowed</span>
+            <button class="btn btn-dark" style="padding:6px 14px; font-size:0.75rem;">Reserve</button>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover" style="background-image: url('img5.jpg');"></div>
+          <h3>Foucault's Pendulum</h3>
+          <p class="author">Umberto Eco</p>
+          <div class="status-row">
+            <span class="badge available">Available</span>
+            <button class="btn btn-gold" style="padding:6px 14px; font-size:0.75rem;">Borrow</button>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-cover" style="background-image: url('img6.jpg');"></div>
+          <h3>Sapiens</h3>
+          <p class="author">Yuval Noah Harari</p>
+          <div class="status-row">
+            <span class="badge reserved">Reserved</span>
+            <button class="btn btn-dark" style="padding:6px 14px; font-size:0.75rem; opacity:0.5;" disabled>Reserve</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRENTLY BORROWED -->
+    <div class="section">
+      <h2>My Borrowed <em>Books</em></h2>
+      <table>
+        <thead>
+          <tr><th>Book</th><th>Borrowed On</th><th>Due Date</th><th>Status</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Meditations</td><td>Nov 1, 2024</td><td>Nov 15, 2024</td>
+            <td><span class="badge borrowed">Active</span></td>
+            <td><button class="btn btn-dark" style="padding:6px 14px; font-size:0.78rem;">Return</button></td>
+          </tr>
+          <tr>
+            <td>The Republic</td><td>Oct 28, 2024</td><td>Nov 11, 2024</td>
+            <td><span class="badge" style="background:rgba(122,31,31,0.25); color:#e07070;">Overdue</span></td>
+            <td><button class="btn btn-dark" style="padding:6px 14px; font-size:0.78rem;">Return</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    // Only admins can access
+    initAuth([3]);
+  </script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* LEFT SIDE — FORM */
+    .left {
+      background: #f5efe6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 70px;
+      position: relative;
+    }
+    .left .back {
+      position: absolute;
+      top: 28px; left: 36px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9c8e7a;
+      text-decoration: none;
+    }
+    .left .back:hover { color: #0d0b08; }
+
+    .form-box { width: 100%; max-width: 360px; }
+
+    .form-box p.label {
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #b8922a;
+      margin-bottom: 10px;
+    }
+    .form-box h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: #0d0b08;
+      margin-bottom: 6px;
+    }
+    .form-box h1 em { color: #7a1f1f; }
+    .form-box .subtitle {
+      color: #9c8e7a;
+      font-size: 0.95rem;
+      margin-bottom: 36px;
+    }
+
+    /* INPUTS */
+    .form-box label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0d0b08;
+      margin-bottom: 6px;
+    }
+    .form-box input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(13,11,8,0.2);
+      border-bottom: 2px solid rgba(13,11,8,0.3);
+      background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: #0d0b08;
+      outline: none;
+      margin-bottom: 20px;
+    }
+    .form-box input:focus { border-color: #b8922a; }
+    .form-box input::placeholder { color: #9c8e7a; }
+
+    .form-box .forgot {
+      display: block;
+      text-align: right;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: #7a1f1f;
+      text-decoration: none;
+      margin-top: -12px;
+      margin-bottom: 28px;
+    }
+
+    /* BUTTONS */
+    .btn-main {
+      width: 100%;
+      padding: 14px;
+      background: #0d0b08;
+      color: #f5efe6;
+      border: none;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .btn-google {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      color: #0d0b08;
+      border: 1.5px solid rgba(13,11,8,0.2);
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .btn-google svg { width: 18px; height: 18px; }
+
+    .divider {
+      text-align: center;
+      color: #9c8e7a;
+      font-size: 0.8rem;
+      margin: 14px 0;
+    }
+
+    .signup {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: #9c8e7a;
+    }
+    .signup a { color: #7a1f1f; font-style: italic; text-decoration: none; }
+
+    /* RIGHT SIDE — IMAGE PANEL */
+    .right {
+      background: url('../img/login-bg.png') center/cover no-repeat;
+      position: relative;
+    }
+    .right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(13,11,8,0.65);
+    }
+    .right-content {
+      position: absolute;
+      bottom: 60px; left: 50px; right: 50px;
+    }
+    .quote-card {
+      background: rgba(13,11,8,0.7);
+      border: 1px solid rgba(184,146,42,0.25);
+      padding: 32px 36px;
+    }
+    .quote-card .stars { color: #b8922a; letter-spacing: 4px; margin-bottom: 14px; }
+    .quote-card blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #f5efe6;
+      line-height: 1.7;
+      border-left: 2px solid #b8922a;
+      padding-left: 16px;
+      margin-bottom: 20px;
+    }
+    .quote-card .name {
+      font-family: 'Playfair Display', serif;
+      color: #f5efe6;
+      font-size: 0.95rem;
+    }
+    .quote-card .role { color: #9c8e7a; font-size: 0.8rem; }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      body { grid-template-columns: 1fr; }
+      .right { display: none; }
+      .left { padding: 50px 28px; }
+    }

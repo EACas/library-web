@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Dashboard</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles/admin_dashboard.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Admin Panel</p>
+    <a href="admin_dashboard.html" class="active">Dashboard</a>
+    <a href="admin_users.html">User Management</a>
+    <a href="admin_config.html">System Config</a>
+    <a href="admin_reports.html">Reports</a>
+    <div class="logout"><a href="../../login.html">Log Out</a></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <h1 class="page-title">Dashboard <em>&amp; Analytics</em></h1>
+    <p class="page-sub">Overview of library activity</p>
+
+    <!-- STAT CARDS -->
+    <div class="stats">
+      <div class="stat-card">
+        <p class="stat-label">Total Books</p>
+        <p class="stat-value">1,240</p>
+        <p class="stat-note">Across all genres</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Currently Borrowed</p>
+        <p class="stat-value">312</p>
+        <p class="stat-note">Available: 928</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Overdue Books</p>
+        <p class="stat-value">47</p>
+        <p class="stat-note">Past due date</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Fine Revenue</p>
+        <p class="stat-value">$380</p>
+        <p class="stat-note">This month</p>
+      </div>
+    </div>
+
+    <!-- BOOKS PER GENRE -->
+    <div class="section">
+      <h2>Books per <em>Genre</em></h2>
+      <div class="genre-row"><span class="genre-label">Philosophy</span>
+        <div class="genre-bar-bg">
+          <div class="genre-bar" style="width:80%"></div>
+        </div><span class="genre-count">240</span>
+      </div>
+      <div class="genre-row"><span class="genre-label">Literature</span>
+        <div class="genre-bar-bg">
+          <div class="genre-bar" style="width:65%"></div>
+        </div><span class="genre-count">195</span>
+      </div>
+      <div class="genre-row"><span class="genre-label">History</span>
+        <div class="genre-bar-bg">
+          <div class="genre-bar" style="width:50%"></div>
+        </div><span class="genre-count">150</span>
+      </div>
+      <div class="genre-row"><span class="genre-label">Science</span>
+        <div class="genre-bar-bg">
+          <div class="genre-bar" style="width:40%"></div>
+        </div><span class="genre-count">120</span>
+      </div>
+      <div class="genre-row"><span class="genre-label">Art</span>
+        <div class="genre-bar-bg">
+          <div class="genre-bar" style="width:25%"></div>
+        </div><span class="genre-count">75</span>
+      </div>
+    </div>
+
+    <!-- OVERDUE REPORT -->
+    <div class="section">
+      <h2>Overdue <em>Reports</em></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Due Date</th>
+            <th>Days Late</th>
+            <th>Fine</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>Meditations</td>
+            <td>Nov 1, 2024</td>
+            <td>12 days</td>
+            <td>$6.00</td>
+            <td><span class="badge overdue">Overdue</span></td>
+          </tr>
+          <tr>
+            <td>Maria Lopez</td>
+            <td>Sapiens</td>
+            <td>Nov 3, 2024</td>
+            <td>10 days</td>
+            <td>$5.00</td>
+            <td><span class="badge overdue">Overdue</span></td>
+          </tr>
+          <tr>
+            <td>James Lee</td>
+            <td>The Republic</td>
+            <td>Nov 8, 2024</td>
+            <td>5 days</td>
+            <td>$2.50</td>
+            <td><span class="badge overdue">Overdue</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BORROWING TRENDS -->
+    <div class="section">
+      <h2>Student Borrowing <em>Trends</em></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Books Borrowed</th>
+            <th>Returned</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>John Doe</td>
+            <td>8</td>
+            <td>6</td>
+            <td><span class="badge borrowed">2 Active</span></td>
+          </tr>
+          <tr>
+            <td>Maria Lopez</td>
+            <td>5</td>
+            <td>4</td>
+            <td><span class="badge borrowed">1 Active</span></td>
+          </tr>
+          <tr>
+            <td>James Lee</td>
+            <td>3</td>
+            <td>3</td>
+            <td><span class="badge ok">All Returned</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    // Only admins can access
+    initAuth([1]);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0d0b08;
+      color: #f5efe6;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #1a1409;
+      border-right: 1px solid rgba(184, 146, 42, 0.2);
+      padding: 30px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: #b8922a;
+      padding: 0 24px 30px;
+      display: block;
+      border-bottom: 1px solid rgba(184, 146, 42, 0.2);
+    }
+
+    .sidebar .role {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #9c8e7a;
+      padding: 20px 24px 6px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 24px;
+      color: #9c8e7a;
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      color: #f5efe6;
+      background: rgba(184, 146, 42, 0.08);
+      border-left-color: #b8922a;
+    }
+
+    .sidebar .logout {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      padding: 0 24px;
+    }
+
+    .sidebar .logout a {
+      color: #7a1f1f;
+      border-left: none;
+      padding: 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* MAIN */
+    .main {
+      margin-left: 240px;
+      padding: 40px 50px;
+      width: 100%;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .page-title em {
+      color: #d4a94a;
+      font-style: italic;
+    }
+
+    .page-sub {
+      color: #9c8e7a;
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+    }
+
+    /* STAT CARDS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: #1a1409;
+      border: 1px solid rgba(184, 146, 42, 0.15);
+      padding: 24px 20px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #9c8e7a;
+      margin-bottom: 10px;
+    }
+
+    .stat-card .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #b8922a;
+    }
+
+    .stat-card .stat-note {
+      font-size: 0.8rem;
+      color: #9c8e7a;
+      margin-top: 6px;
+    }
+
+    /* SECTION */
+    .section {
+      margin-bottom: 40px;
+    }
+
+    .section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      border-bottom: 1px solid rgba(184, 146, 42, 0.2);
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section h2 em {
+      color: #d4a94a;
+      font-style: italic;
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    th {
+      text-align: left;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9c8e7a;
+      border-bottom: 1px solid rgba(184, 146, 42, 0.2);
+      padding: 10px 14px;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: #ede4d4;
+    }
+
+    tr:hover td {
+      background: rgba(184, 146, 42, 0.05);
+    }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .badge.overdue {
+      background: rgba(122, 31, 31, 0.25);
+      color: #e07070;
+    }
+
+    .badge.ok {
+      background: rgba(42, 122, 42, 0.2);
+      color: #70c070;
+    }
+
+    .badge.borrowed {
+      background: rgba(184, 146, 42, 0.2);
+      color: #d4a94a;
+    }
+
+    /* GENRE BARS */
+    .genre-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .genre-label {
+      width: 140px;
+      font-size: 0.9rem;
+      color: #9c8e7a;
+      flex-shrink: 0;
+    }
+
+    .genre-bar-bg {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .genre-bar {
+      height: 8px;
+      background: #b8922a;
+    }
+
+    .genre-count {
+      width: 40px;
+      text-align: right;
+      font-size: 0.85rem;
+      color: #d4a94a;
+    }

@@ -1,0 +1,61 @@
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0d0b08; color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 18px; display: flex; }
+
+    /* SIDEBAR */
+    .sidebar { width: 240px; min-height: 100vh; background: #1a1409; border-right: 1px solid rgba(184,146,42,0.2); padding: 30px 0; position: fixed; top: 0; left: 0; }
+    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #b8922a; padding: 0 24px 30px; display: block; border-bottom: 1px solid rgba(184,146,42,0.2); }
+    .sidebar .role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #9c8e7a; padding: 20px 24px 6px; }
+    .sidebar a { display: block; padding: 12px 24px; color: #9c8e7a; text-decoration: none; font-size: 0.95rem; border-left: 3px solid transparent; }
+    .sidebar a:hover, .sidebar a.active { color: #f5efe6; background: rgba(184,146,42,0.08); border-left-color: #b8922a; }
+    .sidebar .logout { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 24px; }
+    .sidebar .logout a { color: #7a1f1f; border-left: none; padding: 0; font-size: 0.85rem; }
+
+    /* MAIN */
+    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+    .page-title em { color: #d4a94a; font-style: italic; }
+    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
+
+    .section { margin-bottom: 44px; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; border-bottom: 1px solid rgba(184,146,42,0.2); padding-bottom: 12px; margin-bottom: 20px; }
+    .section h2 em { color: #d4a94a; font-style: italic; }
+
+    /* NOTIFICATION ITEM */
+    .notif-item {
+      background: #1a1409;
+      border: 1px solid rgba(184,146,42,0.12);
+      padding: 20px 24px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .notif-text p   { font-size: 1rem; color: #f5efe6; margin-bottom: 4px; }
+    .notif-text small { font-size: 0.8rem; color: #9c8e7a; }
+
+    /* Coloured dot to show notification type */
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .dot.reminder  { background: #b8922a; }   /* gold  = due date reminder */
+    .dot.available { background: #70c070; }   /* green = book now available */
+    .dot.overdue   { background: #e07070; }   /* red   = overdue notice */
+
+    /* TYPE LEGEND */
+    .legend {
+      display: flex; gap: 24px; margin-bottom: 28px; flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; color: #9c8e7a;
+    }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* EMPTY STATE */
+    .empty {
+      color: #9c8e7a; font-style: italic; padding: 20px 0; font-size: 0.95rem;
+    }

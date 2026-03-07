@@ -5,65 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Librarian — Book Management</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0d0b08; color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 18px; display: flex; }
-
-    .sidebar { width: 240px; min-height: 100vh; background: #1a1409; border-right: 1px solid rgba(184,146,42,0.2); padding: 30px 0; position: fixed; top: 0; left: 0; }
-    .sidebar .logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #b8922a; padding: 0 24px 30px; display: block; border-bottom: 1px solid rgba(184,146,42,0.2); }
-    .sidebar .role { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: #9c8e7a; padding: 20px 24px 6px; }
-    .sidebar a { display: block; padding: 12px 24px; color: #9c8e7a; text-decoration: none; font-size: 0.95rem; border-left: 3px solid transparent; }
-    .sidebar a:hover, .sidebar a.active { color: #f5efe6; background: rgba(184,146,42,0.08); border-left-color: #b8922a; }
-    .sidebar .logout { position: absolute; bottom: 30px; left: 0; right: 0; padding: 0 24px; }
-    .sidebar .logout a { color: #7a1f1f; border-left: none; padding: 0; font-size: 0.85rem; }
-
-    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
-    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
-    .page-title em { color: #d4a94a; font-style: italic; }
-    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
-
-    .top-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .search-input { padding: 10px 16px; background: #1a1409; border: 1px solid rgba(184,146,42,0.2); color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none; width: 240px; }
-    .search-input::placeholder { color: #9c8e7a; }
-    select.filter { padding: 10px 14px; background: #1a1409; border: 1px solid rgba(184,146,42,0.2); color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; outline: none; }
-    select.filter option { background: #1a1409; }
-
-    .btn { padding: 10px 24px; border: none; cursor: pointer; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; }
-    .btn-gold { background: #b8922a; color: #0d0b08; }
-    .btn-dark { background: #2e2314; color: #f5efe6; }
-    .btn-red  { background: rgba(122,31,31,0.3); color: #e07070; }
-
-    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-    th { text-align: left; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: #9c8e7a; border-bottom: 1px solid rgba(184,146,42,0.2); padding: 10px 14px; }
-    td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); color: #ede4d4; }
-    tr:hover td { background: rgba(184,146,42,0.05); }
-
-    .badge { display: inline-block; padding: 3px 10px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
-    .badge.available { background: rgba(42,122,42,0.2);   color: #70c070; }
-    .badge.borrowed  { background: rgba(184,146,42,0.2);  color: #d4a94a; }
-    .badge.reserved  { background: rgba(42,80,180,0.2);   color: #7090e0; }
-    .badge.lost      { background: rgba(122,31,31,0.25);  color: #e07070; }
-    .badge.damaged   { background: rgba(140,80,20,0.3);   color: #d49060; }
-
-    .action-btns { display: flex; gap: 8px; }
-
-    /* MODAL */
-    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(13,11,8,0.85); z-index: 100; align-items: center; justify-content: center; }
-    .modal-bg.open { display: flex; }
-    .modal { background: #1a1409; border: 1px solid rgba(184,146,42,0.25); padding: 36px 40px; width: 460px; max-height: 90vh; overflow-y: auto; }
-    .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 24px; }
-    .modal h3 em { color: #d4a94a; font-style: italic; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: #9c8e7a; margin-bottom: 6px; }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 10px 14px; background: #0d0b08;
-      border: 1px solid rgba(184,146,42,0.2); color: #f5efe6;
-      font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none;
-    }
-    .form-group select option { background: #1a1409; }
-    .form-group textarea { resize: vertical; min-height: 80px; }
-    .modal-btns { display: flex; gap: 12px; margin-top: 24px; }
-  </style>
+  <link rel="stylesheet" href="../../styles/librarian_books.css" />
 </head>
 <body>
 
@@ -178,5 +120,12 @@
     </div>
   </div>
 
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    // Only admins can access
+    initAuth([2]);
+  </script>
 </body>
 </html>

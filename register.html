@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Library — Register</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles/register.css" />
+</head>
+
+<body>
+
+  <!-- LEFT: FORM -->
+  <div class="left">
+    <a href="index.html" class="back">← Back to library</a>
+
+    <div class="form-box">
+      <p class="label">New Member</p>
+      <h1>Create <em>Account</em></h1>
+      <p class="subtitle">Register to access the library.</p>
+
+      <form id="registerForm">
+
+        <!-- Role -->
+        <label for="role">I am a</label>
+        <select id="role" name="role" required>
+          <option value="">Select your role...</option>
+          <option value="1">Admin</option>
+          <option value="2">Librarian</option>
+          <option value="3">Student</option>
+        </select>
+
+        <!-- First and Last name side by side -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div>
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" placeholder="e.g. John" required />
+          </div>
+          <div>
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" placeholder="e.g. Doe" required />
+          </div>
+        </div>
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select your gender...</option>
+          <option value="1">Male</option>
+          <option value="2">Female</option>
+        </select>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="e.g. 628 2364" required />
+
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob" required />
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required />
+
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" placeholder="••••••••" required />
+
+        <button type="submit" class="btn-main">Create Account</button>
+
+      </form>
+
+      <p class="signin">Already have an account? <a href="login.html">Sign in here</a></p>
+    </div>
+  </div>
+
+  <!-- RIGHT: IMAGE PANEL -->
+  <div class="right">
+    <div class="right-content">
+      <div class="quote-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Joining Book Library opened up a whole world of knowledge I never expected to find."</blockquote>
+        <p class="name">James L.</p>
+        <p class="role">Student, University of Belize</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
+  <script src="js/register.js"></script>
+
+</body>
+
+</html>

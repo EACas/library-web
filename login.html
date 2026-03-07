@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Library — Sign In</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles/login.css" />
+</head>
+
+<body>
+
+  <!-- LEFT: FORM -->
+  <div class="left">
+    <a href="index.html" class="back">← Back to library</a>
+
+    <div class="form-box">
+      <p class="label">Member Access</p>
+      <h1>Welcome <em>Back</em></h1>
+      <p class="subtitle">Sign in to access your library.</p>
+
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="your@email.com" />
+
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="••••••••" />
+
+        <a href="#" class="forgot">Forgot password?</a>
+
+        <button class="btn-main" type="submit">Sign In</button>
+      </form>
+
+      <p class="signup">Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+  </div>
+
+  <!-- RIGHT: IMAGE PANEL — replace img1.jpg -->
+  <div class="right">
+    <div class="right-content">
+      <div class="quote-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Every visit to Book Library feels like stepping into another era. Their curation is impeccable."
+        </blockquote>
+        <p class="name">Eleanor V.</p>
+        <p class="role">Collector & Reader, London</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>''
+  <script src="js/login.js"></script>
+</body>
+
+</html>
