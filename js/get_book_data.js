@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (data.success) {
       let html = `
-        <h2>Books <em>Registered</em></h2>
             <table>
                 <thead>
                     <tr>

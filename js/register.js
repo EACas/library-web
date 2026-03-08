@@ -1,38 +1,43 @@
-// Open modal and set role
-function openAddModal(roleId, roleName) {
-    document.getElementById("addModal").classList.add("open");
-    document.getElementById("role").value = roleId;
-    document.getElementById("modalRoleText").innerText = roleName;
+function openAddModal(roleId, roleText) {
+  document.getElementById("role").value        = roleId;
+  document.getElementById("modalRoleText").textContent = roleText;
+  document.getElementById("addModal").classList.add("open");
+  document.getElementById("addUserForm").reset();
+  const msg = document.getElementById("addUserMessage");
+  if (msg) msg.textContent = "";
 }
 
-// Close modal
 function closeModal() {
-    document.getElementById("addModal").classList.remove("open");
+  document.getElementById("addModal").classList.remove("open");
 }
 
-// Submit form
-document.getElementById("addUserForm").addEventListener("submit", async function(e){
-    e.preventDefault();
+document.getElementById("addUserForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const formData = new FormData(this);
+  const form    = document.getElementById("addUserForm");
+  const message = document.getElementById("addUserMessage");
+  const formData = new FormData(form);
 
-    try {
-        const response = await fetch("../../php/core/register.php", {
-            method: "POST",
-            body: formData
-        });
+  try {
+    const res  = await fetch("../../php/ac/register_user.php", {
+      method: "POST",
+      body: formData,
+      credentials: "same-origin"
+    });
+    const data = await res.json();
 
-        const result = await response.json();
-
-        if(result.success){
-            closeModal();
-            loadUsers();
-        } else {
-            alert(result.message || "Error creating user");
-        }
-
-    } catch(err) {
-        console.error(err);
-        alert("Request failed");
+    if (data.success) {
+      message.style.color   = "green";
+      message.textContent   = data.message;
+      form.reset();
+      loadUsers(); // refresh all three tables
+    } else {
+      message.style.color = "red";
+      message.textContent = data.message || "Failed to register user.";
     }
+  } catch (err) {
+    console.error(err);
+    message.style.color = "red";
+    message.textContent = "Error connecting to server.";
+  }
 });

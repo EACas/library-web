@@ -56,23 +56,33 @@ async function loadGenres() {
 }
 
 async function loadBooks() {
-    const res = await fetch("../../php/data/get_book_data.php");
-    const books = await res.json();
+    const res  = await fetch("../../php/data/get_book_data.php");
+    const data = await res.json();
+
     const container = document.getElementById("bookTableContainer");
+
+    if (!data.success) {
+        container.innerHTML = "Failed to load books.";
+        return;
+    }
+
     container.innerHTML = `<table><thead><tr>
-        <th>ID</th><th>Title</th><th>Authors</th><th>Genres</th><th>Description</th><th>Publish Date</th><th>Price</th><th>Stock</th>
+        <th>ID</th><th>Title</th><th>Authors</th><th>Genres</th>
+        <th>Description</th><th>Publish Date</th><th>Price</th><th>Stock</th>
     </tr></thead><tbody></tbody></table>`;
+
     const tbody = container.querySelector("tbody");
-    books.forEach(b => {
+    data.books.forEach(b => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td>${b.book_id}</td>
-                        <td>${b.book_title}</td>
-                        <td>${b.authors}</td>
-                        <td>${b.genres}</td>
-                        <td>${b.description}</td>
-                        <td>${b.publish_date}</td>
-                        <td>${b.price}</td>
-                        <td>${b.stock}</td>`;
+        tr.innerHTML = `
+            <td>${b.book_id}</td>
+            <td>${b.book_title}</td>
+            <td>${b.authors.join(", ")}</td>
+            <td>${b.genres.join(", ")}</td>
+            <td>${b.description}</td>
+            <td>${b.publish_date}</td>
+            <td>$${parseFloat(b.price).toFixed(2)}</td>
+            <td>${b.stock}</td>`;
         tbody.appendChild(tr);
     });
 }

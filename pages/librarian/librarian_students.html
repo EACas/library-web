@@ -30,40 +30,21 @@
       <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Register Student</button>
     </div>
 
-    <table>
-      <thead>
-        <tr><th>Name</th><th>Student ID</th><th>Email</th><th>Books Borrowed</th><th>Fines</th><th>Status</th><th>Actions</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>John Doe</td><td>STU-001</td><td>john@uni.edu</td><td>2</td><td>$6.00</td>
-          <td><span class="badge active">Active</span></td>
-          <td><div class="action-btns">
-            <button class="btn btn-dark">Edit</button>
-            <button class="btn btn-red">Suspend</button>
-            <button class="btn btn-red">Delete</button>
-          </div></td>
-        </tr>
-        <tr>
-          <td>Maria Lopez</td><td>STU-002</td><td>maria@uni.edu</td><td>1</td><td>$0.00</td>
-          <td><span class="badge active">Active</span></td>
-          <td><div class="action-btns">
-            <button class="btn btn-dark">Edit</button>
-            <button class="btn btn-red">Suspend</button>
-            <button class="btn btn-red">Delete</button>
-          </div></td>
-        </tr>
-        <tr>
-          <td>James Lee</td><td>STU-003</td><td>james@uni.edu</td><td>0</td><td>$2.50</td>
-          <td><span class="badge suspended">Suspended</span></td>
-          <td><div class="action-btns">
-            <button class="btn btn-dark">Edit</button>
-            <button class="btn btn-gold">Reactivate</button>
-            <button class="btn btn-red">Delete</button>
-          </div></td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- Replace the entire <table> block -->
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Student ID</th>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="studentTableBody">
+    <!-- populated by get_users.js -->
+  </tbody>
+</table>
   </div>
 
   <!-- REGISTER STUDENT MODAL -->
@@ -83,6 +64,7 @@
 <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
     crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
+  <script src="../../js/get_students.js"></script>
   <script>
     // Only admins can access
     initAuth([2]);

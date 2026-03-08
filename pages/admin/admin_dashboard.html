@@ -35,54 +35,30 @@
     <div class="stats">
       <div class="stat-card">
         <p class="stat-label">Total Books</p>
-        <p class="stat-value">1,240</p>
+        <p class="stat-value" id="statTotalBooks">—</p>
         <p class="stat-note">Across all genres</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Currently Borrowed</p>
-        <p class="stat-value">312</p>
-        <p class="stat-note">Available: 928</p>
+        <p class="stat-value" id="statBorrowed">—</p>
+        <p class="stat-note" id="statAvailable">—</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Overdue Books</p>
-        <p class="stat-value">47</p>
+        <p class="stat-value" id="statOverdue">—</p>
         <p class="stat-note">Past due date</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Fine Revenue</p>
-        <p class="stat-value">$380</p>
+        <p class="stat-value" id="statFineRevenue">—</p>
         <p class="stat-note">This month</p>
       </div>
     </div>
-    
+
     <!-- BOOKS PER GENRE -->
     <div class="section">
       <h2>Books per <em>Genre</em></h2>
-      <div class="genre-row"><span class="genre-label">Philosophy</span>
-        <div class="genre-bar-bg">
-          <div class="genre-bar" style="width:80%"></div>
-        </div><span class="genre-count">240</span>
-      </div>
-      <div class="genre-row"><span class="genre-label">Literature</span>
-        <div class="genre-bar-bg">
-          <div class="genre-bar" style="width:65%"></div>
-        </div><span class="genre-count">195</span>
-      </div>
-      <div class="genre-row"><span class="genre-label">History</span>
-        <div class="genre-bar-bg">
-          <div class="genre-bar" style="width:50%"></div>
-        </div><span class="genre-count">150</span>
-      </div>
-      <div class="genre-row"><span class="genre-label">Science</span>
-        <div class="genre-bar-bg">
-          <div class="genre-bar" style="width:40%"></div>
-        </div><span class="genre-count">120</span>
-      </div>
-      <div class="genre-row"><span class="genre-label">Art</span>
-        <div class="genre-bar-bg">
-          <div class="genre-bar" style="width:25%"></div>
-        </div><span class="genre-count">75</span>
-      </div>
+      <div id="genreContainer"><!-- populated by JS --></div>
     </div>
 
     <!-- OVERDUE REPORT -->
@@ -99,32 +75,7 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>Meditations</td>
-            <td>Nov 1, 2024</td>
-            <td>12 days</td>
-            <td>$6.00</td>
-            <td><span class="badge overdue">Overdue</span></td>
-          </tr>
-          <tr>
-            <td>Maria Lopez</td>
-            <td>Sapiens</td>
-            <td>Nov 3, 2024</td>
-            <td>10 days</td>
-            <td>$5.00</td>
-            <td><span class="badge overdue">Overdue</span></td>
-          </tr>
-          <tr>
-            <td>James Lee</td>
-            <td>The Republic</td>
-            <td>Nov 8, 2024</td>
-            <td>5 days</td>
-            <td>$2.50</td>
-            <td><span class="badge overdue">Overdue</span></td>
-          </tr>
-        </tbody>
+        <tbody id="overdueTableBody"></tbody>
       </table>
     </div>
 
@@ -140,26 +91,7 @@
             <th>Active</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>8</td>
-            <td>6</td>
-            <td><span class="badge borrowed">2 Active</span></td>
-          </tr>
-          <tr>
-            <td>Maria Lopez</td>
-            <td>5</td>
-            <td>4</td>
-            <td><span class="badge borrowed">1 Active</span></td>
-          </tr>
-          <tr>
-            <td>James Lee</td>
-            <td>3</td>
-            <td>3</td>
-            <td><span class="badge ok">All Returned</span></td>
-          </tr>
-        </tbody>
+        <tbody id="trendsTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -167,11 +99,12 @@
   <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
     crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
+  <script src="../../js/admin_dashboard.js"></script>
   <script>
     // Only admins can access
     initAuth([1]);
   </script>
-  
+
 
 </body>
 
