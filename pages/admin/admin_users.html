@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — User Management</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../../styles/admin_users.css" />
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -17,6 +21,7 @@
     <a href="admin_users.html" class="active">User Management</a>
     <a href="admin_config.html">System Config</a>
     <a href="admin_reports.html">Reports</a>
+    <a href="book_management.html">Book Management</a>
     <div class="logout"><a href="login.html">Log Out</a></div>
   </div>
 
@@ -25,35 +30,45 @@
     <h1 class="page-title">User <em>Management</em></h1>
     <p class="page-sub">Manage librarian and student accounts</p>
 
+    <!-- ADMINS -->
+    <div class="section">
+      <h2>Admin <em>Accounts</em></h2>
+      <div class="top-bar">
+        <input class="search-input" type="text" placeholder="Search admins..." />
+        <button class="btn btn-gold" onclick="openAddModal(1,'Admin')">+ Add Admin</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date Added</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="adminTableBody"></tbody>
+      </table>
+    </div>
+
     <!-- LIBRARIANS -->
     <div class="section">
       <h2>Librarian <em>Accounts</em></h2>
       <div class="top-bar">
         <input class="search-input" type="text" placeholder="Search librarians..." />
-        <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Add Librarian</button>
+        <button class="btn btn-gold" onclick="openAddModal(2,'Librarian')">+ Add Librarian</button>
       </div>
       <table>
         <thead>
-          <tr><th>Name</th><th>Email</th><th>Date Added</th><th>Status</th><th>Actions</th></tr>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Date Added</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>Anna Smith</td><td>anna@library.edu</td><td>Jan 10, 2024</td>
-            <td><span class="badge active">Active</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">Edit</button>
-              <button class="btn btn-red">Suspend</button>
-            </div></td>
-          </tr>
-          <tr>
-            <td>Carlos Reyes</td><td>carlos@library.edu</td><td>Mar 5, 2024</td>
-            <td><span class="badge suspended">Suspended</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">Edit</button>
-              <button class="btn btn-gold">Reactivate</button>
-            </div></td>
-          </tr>
-        </tbody>
+        <tbody id="librarianTableBody"></tbody>
       </table>
     </div>
 
@@ -62,32 +77,19 @@
       <h2>Student <em>Accounts</em></h2>
       <div class="top-bar">
         <input class="search-input" type="text" placeholder="Search students..." />
-        <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Add Student</button>
+        <button class="btn btn-gold" onclick="openAddModal(3,'Student')">+ Add Student</button>
       </div>
       <table>
         <thead>
-          <tr><th>Name</th><th>Student ID</th><th>Email</th><th>Status</th><th>Actions</th></tr>
+          <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>John Doe</td><td>STU-001</td><td>john@uni.edu</td>
-            <td><span class="badge active">Active</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">Edit</button>
-              <button class="btn btn-red">Suspend</button>
-              <button class="btn btn-red">Delete</button>
-            </div></td>
-          </tr>
-          <tr>
-            <td>Maria Lopez</td><td>STU-002</td><td>maria@uni.edu</td>
-            <td><span class="badge active">Active</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">Edit</button>
-              <button class="btn btn-red">Suspend</button>
-              <button class="btn btn-red">Delete</button>
-            </div></td>
-          </tr>
-        </tbody>
+        <tbody id="studentTableBody"></tbody>
       </table>
     </div>
   </div>
@@ -95,40 +97,71 @@
   <!-- ADD USER MODAL -->
   <div class="modal-bg" id="addModal">
     <div class="modal">
-      <h3>Add New <em>User</em></h3>
-      <div class="form-group">
-        <label>Full Name</label>
-        <input type="text" placeholder="e.g. Anna Smith" />
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="user@library.edu" />
-      </div>
-      <div class="form-group">
-        <label>Role</label>
-        <select>
-          <option>Librarian</option>
-          <option>Student</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" placeholder="••••••••" />
-      </div>
-      <div class="modal-btns">
-        <button class="btn btn-gold">Save</button>
-        <button class="btn btn-dark" onclick="document.getElementById('addModal').classList.remove('open')">Cancel</button>
-      </div>
+      <h3>Add New <em id="modalRoleText">User</em></h3>
+
+      <form id="addUserForm">
+
+        <!-- Hidden role field -->
+        <input type="hidden" id="role" name="role">
+
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="firstname" required>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="lastname" required>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select name="gender" required>
+            <option value="">Select gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="text" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" name="dob" required>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" required>
+        </div>
+
+        <div class="modal-btns">
+          <button type="submit" class="btn btn-gold">Save</button>
+          <button type="button" class="btn btn-dark" onclick="closeModal()">Cancel</button>
+        </div>
+
+      </form>
     </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
     crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
+  <script src="../../js/get_users.js"></script>
+  <script src="../../js/register.js"></script>
   <script>
     // Only admins can access
     initAuth([1]);
   </script>
 
 </body>
+
 </html>

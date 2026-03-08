@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin — System Config</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../../styles/admin_config.css" />
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -17,6 +21,7 @@
     <a href="admin_users.html">User Management</a>
     <a href="admin_config.html" class="active">System Config</a>
     <a href="admin_reports.html">Reports</a>
+    <a href="book_management.html">Book Management</a>
     <div class="logout"><a href="login.html">Log Out</a></div>
   </div>
 
@@ -63,14 +68,50 @@
       <h2>System Activity <em>Logs</em></h2>
       <table>
         <thead>
-          <tr><th>Date</th><th>Student</th><th>Book</th><th>Action</th><th>Librarian</th></tr>
+          <tr>
+            <th>Date</th>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Action</th>
+            <th>Librarian</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>Nov 13, 2024</td><td>John Doe</td><td>Meditations</td><td><span class="badge borrow">Borrowed</span></td><td>Anna Smith</td></tr>
-          <tr><td>Nov 12, 2024</td><td>Maria Lopez</td><td>Sapiens</td><td><span class="badge return">Returned</span></td><td>Anna Smith</td></tr>
-          <tr><td>Nov 11, 2024</td><td>James Lee</td><td>The Republic</td><td><span class="badge overdue">Overdue Fine</span></td><td>Carlos Reyes</td></tr>
-          <tr><td>Nov 10, 2024</td><td>Sara Khan</td><td>Name of the Rose</td><td><span class="badge borrow">Borrowed</span></td><td>Anna Smith</td></tr>
-          <tr><td>Nov 9, 2024</td><td>Tom Brown</td><td>Foucault's Pendulum</td><td><span class="badge return">Returned</span></td><td>Carlos Reyes</td></tr>
+          <tr>
+            <td>Nov 13, 2024</td>
+            <td>John Doe</td>
+            <td>Meditations</td>
+            <td><span class="badge borrow">Borrowed</span></td>
+            <td>Anna Smith</td>
+          </tr>
+          <tr>
+            <td>Nov 12, 2024</td>
+            <td>Maria Lopez</td>
+            <td>Sapiens</td>
+            <td><span class="badge return">Returned</span></td>
+            <td>Anna Smith</td>
+          </tr>
+          <tr>
+            <td>Nov 11, 2024</td>
+            <td>James Lee</td>
+            <td>The Republic</td>
+            <td><span class="badge overdue">Overdue Fine</span></td>
+            <td>Carlos Reyes</td>
+          </tr>
+          <tr>
+            <td>Nov 10, 2024</td>
+            <td>Sara Khan</td>
+            <td>Name of the Rose</td>
+            <td><span class="badge borrow">Borrowed</span></td>
+            <td>Anna Smith</td>
+          </tr>
+          <tr>
+            <td>Nov 9, 2024</td>
+            <td>Tom Brown</td>
+            <td>Foucault's Pendulum</td>
+            <td><span class="badge return">Returned</span></td>
+            <td>Carlos Reyes</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -84,4 +125,5 @@
     initAuth([1]);
   </script>
 </body>
+
 </html>

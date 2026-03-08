@@ -1,49 +1,38 @@
-$(document).ready(function () {
+// Open modal and set role
+function openAddModal(roleId, roleName) {
+    document.getElementById("addModal").classList.add("open");
+    document.getElementById("role").value = roleId;
+    document.getElementById("modalRoleText").innerText = roleName;
+}
 
-  $("#registerForm").submit(function (e) {
-    e.preventDefault(); // stop page reload
+// Close modal
+function closeModal() {
+    document.getElementById("addModal").classList.remove("open");
+}
 
-    let password = $("#password").val();
-    let confirm = $("#confirm").val();
+// Submit form
+document.getElementById("addUserForm").addEventListener("submit", async function(e){
+    e.preventDefault();
 
-    // password match validation
-    if (password !== confirm) {
-      alert("Passwords do not match.");
-      return;
-    }
+    const formData = new FormData(this);
 
-    // collect form data
-    let formData = $(this).serialize();
+    try {
+        const response = await fetch("../../php/core/register.php", {
+            method: "POST",
+            body: formData
+        });
 
-    $.ajax({
-      url: "php/core/register.php", // path to your PHP file
-      type: "POST",
-      data: formData,
-      dataType: "json",
+        const result = await response.json();
 
-      success: function (response) {
-
-        if (response.success) {
-
-          alert("Account created successfully!");
-
-          // reset form
-          $("#registerForm")[0].reset();
-
+        if(result.success){
+            closeModal();
+            loadUsers();
         } else {
-
-          alert(response.message);
-
+            alert(result.message || "Error creating user");
         }
 
-      },
-
-      error: function () {
-        alert("Server error. Please try again.");
-      }
-
-    });
-
-  });
-
+    } catch(err) {
+        console.error(err);
+        alert("Request failed");
+    }
 });
