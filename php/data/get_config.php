@@ -28,7 +28,7 @@ $res = $conn->query("
         b.book_title,
         uba.borrowed_time,
         uba.due_date,
-        uba.total_coast,
+        uba.total_cost,
         uba.status
     FROM user_book_actions uba
     JOIN users u ON uba.user_id = u.user_id

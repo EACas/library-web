@@ -207,3 +207,14 @@
         font-style: italic;
         color: #70c070;
     }
+
+    .main { margin-left: 240px; padding: 40px 50px; width: 100%; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 6px; }
+    .page-title em { color: #d4a94a; font-style: italic; }
+    .page-sub { color: #9c8e7a; font-size: 0.9rem; margin-bottom: 36px; }
+
+    .top-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .search-input { padding: 10px 16px; background: #1a1409; border: 1px solid rgba(184,146,42,0.2); color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 1rem; outline: none; width: 240px; }
+    .search-input::placeholder { color: #9c8e7a; }
+    select.filter { padding: 10px 14px; background: #1a1409; border: 1px solid rgba(184,146,42,0.2); color: #f5efe6; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; outline: none; }
+    select.filter option { background: #1a1409; }

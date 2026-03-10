@@ -2,125 +2,175 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Management</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Management</title>
+  <link rel="stylesheet" href="../../styles/book_management.css" />
 </head>
 
 <body>
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <span class="logo">Book Library</span>
-        <p class="role">Admin Panel</p>
-        <a href="admin_dashboard.html">Dashboard</a>
-        <a href="admin_users.html">User Management</a>
-        <a href="admin_config.html">System Config</a>
-        <a href="admin_reports.html">Reports</a>
-        <a href="admin_dashboard.html" class="active">Book Management</a>
-        <div class="logout"><a href="../../login.html">Log Out</a></div>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <span class="logo">Book Library</span>
+    <p class="role">Admin Panel</p>
+    <a href="admin_dashboard.html">Dashboard</a>
+    <a href="admin_users.html">User Management</a>
+    <a href="admin_config.html">System Config</a>
+    <a href="admin_reports.html">Reports</a>
+    <a href="book_management.html" class="active">Book Management</a>
+    <div class="logout"><a href="../../login.html">Log Out</a></div>
+  </div>
+
+  <div class="main">
+
+    <h1 class="page-title">Book <em>Management</em></h1>
+    <p class="page-sub">Add, edit, categorize and update book status</p>
+
+    <!-- BOOKS SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Books</h2>
+      </div>
+      <div class="top-bar">
+        <input class="search-input" id="bookSearch" type="text" placeholder="Search by title, author..." />
+        <select class="filter" id="genreFilter">
+          <option value="">All Genres</option>
+        </select>
+        <select class="filter" id="sortSelect">
+          <option value="title">Sort: A–Z</option>
+          <option value="author">Sort: Author</option>
+          <option value="year">Sort: Year</option>
+        </select>
+        <button class="btn btn-gold" onclick="document.getElementById('bookModal').classList.add('open')">+ Add
+          Book</button>
+
+      </div>
+      <div id="bookTableContainer"></div>
     </div>
 
-    <div class="main">
+    <!-- AUTHORS SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Authors</h2>
 
-        <!-- BUTTONS TO OPEN MODALS -->
-        <div class="section">
-            <button class="btn btn-gold" onclick="document.getElementById('bookModal').classList.add('open')">+ Add
-                Book</button>
-            <button class="btn btn-gold" onclick="document.getElementById('authorModal').classList.add('open')">+ Add
-                Author</button>
-        </div>
-
-        <!-- MODAL: Register Book -->
-        <div class="modal-bg" id="bookModal">
-            <div class="modal">
-                <h3>Register <em>New Book</em></h3>
-                <form id="registerBookForm" class="book-form">
-                    <div class="form-group">
-                        <label for="book_title">Book Title</label>
-                        <input type="text" id="book_title" name="book_title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="author_name">Author</label>
-                        <select id="authorSelect" name="author_id" required>
-                            <option value="">Select Author</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Genres</label>
-                        <div id="genreCheckboxContainer"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="publish_date">Publish Date</label>
-                        <input type="date" id="publish_date" name="publish_date" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price ($)</label>
-                        <input type="number" id="price" name="price" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="stock">Stock</label>
-                        <input type="number" id="stock" name="stock" required>
-                    </div>
-                    <div class="modal-btns">
-                        <button type="submit" class="btn btn-gold">Register Book</button>
-                        <button type="button" class="btn btn-dark"
-                            onclick="document.getElementById('bookModal').classList.remove('open')">Cancel</button>
-                    </div>
-                </form>
-                <p id="bookMessage" class="form-message"></p>
-            </div>
-        </div>
-
-        <!-- MODAL: Register Author -->
-        <div class="modal-bg" id="authorModal">
-            <div class="modal">
-                <h3>Register <em>New Author</em></h3>
-                <form id="registerAuthorForm" class="book-form">
-                    <div class="form-group">
-                        <label for="author_name">Author Name</label>
-                        <input type="text" id="author_name" name="author_name" placeholder="e.g. J.K. Rowling" required>
-                    </div>
-                    <div class="modal-btns">
-                        <button type="submit" class="btn btn-gold">Register Author</button>
-                        <button type="button" class="btn btn-dark"
-                            onclick="document.getElementById('authorModal').classList.remove('open')">Cancel</button>
-                    </div>
-                </form>
-                <p id="authorMessage" class="form-message"></p>
-            </div>
-        </div>
-
-        <!-- TABLES -->
-        <div class="section">
-            <h2>Books</h2>
-            <div id="bookTableContainer"></div>
-        </div>
-
-        <div class="section">
-            <h2>Authors</h2>
-            <div id="authorTableContainer"></div>
-        </div>
-
-        <div class="section">
-            <h2>Genres</h2>
-            <div id="genreTableContainer"></div>
-        </div>
-
+      </div>
+      <div class="top-bar">
+        <input class="search-input" id="authorSearch" type="text" placeholder="Search by name..." />
+        <button class="btn btn-gold" onclick="document.getElementById('authorModal').classList.add('open')">+ Add
+          Author</button>
+      </div>
+      <div id="authorTableContainer"></div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-4.0.0.js"
-        integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
-    <script src="../../js/auth.js"></script>
-    <script>
-        initAuth([1]); // Only admins
-    </script>
-    <script src="../../js/register_book.js"></script>
-    <script src="../../js/register_author.js"></script>
-    <script src="../../js/get_authors_and_genres.js"></script>
+    <!-- GENRES SECTION -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Genres</h2>
+
+      </div>
+      <div class="top-bar">
+        <input class="search-input" id="genreSearch" type="text" placeholder="Search by genre..." />
+        <button class="btn btn-gold" onclick="document.getElementById('genreModal').classList.add('open')">+ Add
+          Genre</button>
+      </div>
+      <div id="genreTableContainer"></div>
+    </div>
+
+  </div>
+
+  <!-- MODAL: Register Book -->
+  <div class="modal-bg" id="bookModal">
+    <div class="modal">
+      <h3>Register <em>New Book</em></h3>
+      <form id="registerBookForm" class="book-form">
+        <div class="form-group">
+          <label for="book_title">Book Title</label>
+          <input type="text" id="book_title" name="book_title" required>
+        </div>
+        <div class="form-group">
+          <label>Author</label>
+          <select id="authorSelect" name="author_id" required>
+            <option value="">Select Author</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Genres</label>
+          <div id="genreCheckboxContainer"></div>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="publish_date">Publish Date</label>
+          <input type="date" id="publish_date" name="publish_date" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Price ($)</label>
+          <input type="number" id="price" name="price" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="stock">Stock</label>
+          <input type="number" id="stock" name="stock" required>
+        </div>
+        <div class="modal-btns">
+          <button type="submit" class="btn btn-gold">Register Book</button>
+          <button type="button" class="btn btn-dark"
+            onclick="document.getElementById('bookModal').classList.remove('open')">Cancel</button>
+        </div>
+      </form>
+      <p id="bookMessage" class="form-message"></p>
+    </div>
+  </div>
+
+  <!-- MODAL: Register Author -->
+  <div class="modal-bg" id="authorModal">
+    <div class="modal">
+      <h3>Register <em>New Author</em></h3>
+      <form id="registerAuthorForm" class="book-form">
+        <div class="form-group">
+          <label for="author_name">Author Name</label>
+          <input type="text" id="author_name" name="author_name" placeholder="e.g. J.K. Rowling" required>
+        </div>
+        <div class="modal-btns">
+          <button type="submit" class="btn btn-gold">Register Author</button>
+          <button type="button" class="btn btn-dark"
+            onclick="document.getElementById('authorModal').classList.remove('open')">Cancel</button>
+        </div>
+      </form>
+      <p id="authorMessage" class="form-message"></p>
+    </div>
+  </div>
+
+  <!-- MODAL: Register Genre -->
+  <div class="modal-bg" id="genreModal">
+    <div class="modal">
+      <h3>Register <em>New Genre</em></h3>
+      <form id="registerGenreForm" class="book-form">
+        <div class="form-group">
+          <label for="genre_name">Genre Name</label>
+          <input type="text" id="genre_name" name="genre_name" placeholder="e.g. Mystery" required>
+        </div>
+        <div class="modal-btns">
+          <button type="submit" class="btn btn-gold">Register Genre</button>
+          <button type="button" class="btn btn-dark"
+            onclick="document.getElementById('genreModal').classList.remove('open')">Cancel</button>
+        </div>
+      </form>
+      <p id="genreMessage" class="form-message"></p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    initAuth([1]);
+  </script>
+  <script src="../../js/register_book.js"></script>
+  <script src="../../js/register_author.js"></script>
+  <script src="../../js/register_genre.js"></script>
+  <script src="../../js/get_authors_and_genres.js"></script>
 
 </body>
 

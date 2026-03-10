@@ -22,7 +22,7 @@
     <a href="admin_config.html">System Config</a>
     <a href="admin_reports.html">Reports</a>
     <a href="book_management.html">Book Management</a>
-    <div class="logout"><a href="login.html">Log Out</a></div>
+    <div class="logout"><a href="../../login.html">Log Out</a></div>
   </div>
 
   <!-- MAIN -->
@@ -138,6 +138,11 @@
           <input type="date" name="dob" required>
         </div>
 
+        <div class="form-group" id="salaryGroup" style="display:none;">
+          <label>Salary ($)</label>
+          <input type="number" name="salary" step="0.01" min="0" placeholder="e.g. 1500.00" />
+        </div>
+
         <div class="form-group">
           <label>Password</label>
           <input type="password" name="password" required>
@@ -157,9 +162,8 @@
   <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
     crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
-  <script src="../../js/get_admins.js"></script>
-  <script src="../../js/get_librarians.js"></script>
-  <script src="../../js/get_students.js"></script>
+  <script src="../../js/get_users.js"></script>
+  <script src="../../js/toggle_status.js"></script>
   <script src="../../js/register.js"></script>
   <script>
     // Only admins can access

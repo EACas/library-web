@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 
 include "../core/database.php";
 
-$sql = "SELECT author_id, author_name FROM authors ORDER BY author_name";
+$sql = "SELECT author_id, author_name FROM authors";
 
 $result = $conn->query($sql);
 

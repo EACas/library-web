@@ -55,19 +55,10 @@ try {
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     ");
     $stmt->bind_param(
-        "sssssisiii",
-        $user_library_id,
-        $email,
-        $f_name,
-        $l_name,
-        $phone_number,
-        $gender,
-        $hashed_password,
-        $dob,
-        $account_status,
-        $library_id,
-        $role_id
-    );
+    "sssssissiii",
+    $user_library_id, $email, $f_name, $l_name, $phone_number,
+    $gender, $hashed_password, $dob, $account_status, $library_id, $role_id
+);
     $stmt->execute();
     $user_id = $conn->insert_id;
     $stmt->close();
@@ -83,16 +74,14 @@ try {
         $stmt->close();
 
     } elseif ($role_id === 2) {
-        // Librarian
-        $salary  = 0.0;
+        $salary  = (float)($_POST["salary"] ?? 0.0);
         $balance = 0.0;
         $began   = date("Y-m-d H:i:s");
         $stmt = $conn->prepare("INSERT INTO librarians (user_id, salary, began_at, account_balance) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("idsd", $user_id, $salary, $began, $balance);
         $stmt->execute();
         $stmt->close();
-    }
-    // role_id === 1 (admin) — no extra table needed
+}
 
     $conn->commit();
 

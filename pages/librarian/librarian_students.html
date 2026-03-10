@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Librarian — Student Accounts</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../../styles/librarian_students.css" />
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -17,7 +21,7 @@
     <a href="librarian_students.html" class="active">Student Accounts</a>
     <a href="librarian_operations.html">Library Operations</a>
     <a href="librarian_notifications.html">Notifications</a>
-    <div class="logout"><a href="login.html">Log Out</a></div>
+    <div class="logout"><a href="../../login.html">Log Out</a></div>
   </div>
 
   <!-- MAIN -->
@@ -27,47 +31,88 @@
 
     <div class="top-bar">
       <input class="search-input" type="text" placeholder="Search by name or ID..." />
-      <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Register Student</button>
+      <button class="btn btn-gold" onclick="document.getElementById('addModal').classList.add('open')">+ Register
+        Student</button>
     </div>
 
     <!-- Replace the entire <table> block -->
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Student ID</th>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="studentTableBody">
-    <!-- populated by get_users.js -->
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Student ID</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody">
+        <!-- populated by get_users.js -->
+      </tbody>
+    </table>
   </div>
 
   <!-- REGISTER STUDENT MODAL -->
   <div class="modal-bg" id="addModal">
     <div class="modal">
       <h3>Register <em>Student</em></h3>
-      <div class="form-group"><label>Full Name</label><input type="text" placeholder="e.g. John Doe" /></div>
-      <div class="form-group"><label>Student ID</label><input type="text" placeholder="e.g. STU-004" /></div>
-      <div class="form-group"><label>Email</label><input type="email" placeholder="student@uni.edu" /></div>
-      <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••" /></div>
-      <div class="modal-btns">
-        <button class="btn btn-gold">Register</button>
-        <button class="btn btn-dark" onclick="document.getElementById('addModal').classList.remove('open')">Cancel</button>
-      </div>
+      <form id="registerStudentForm">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" name="f_name" placeholder="e.g. John" required />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" name="l_name" placeholder="e.g. Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Student ID</label>
+          <input type="text" name="user_library_id" placeholder="e.g. STU-004" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="student@uni.edu" required />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="••••••••" required />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" name="phone_number" placeholder="e.g. 6221234" required />
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select name="gender" required>
+            <option value="">Select gender</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" name="dob" required />
+        </div>
+
+        <div id="studentMessage"></div>
+
+        <div class="modal-btns">
+          <button type="submit" class="btn btn-gold">Register</button>
+          <button type="button" class="btn btn-dark"
+            onclick="document.getElementById('addModal').classList.remove('open')">Cancel</button>
+        </div>
+      </form>
     </div>
   </div>
-<script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
     crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
-  <script src="../../js/get_students.js"></script>
   <script>
-    // Only admins can access
     initAuth([2]);
   </script>
+  <script src="../../js/get_students.js"></script>
+  <script src="../../js/toggle_status.js"></script>
+  <script src="../../js/register_student.js"></script>
 </body>
+
 </html>

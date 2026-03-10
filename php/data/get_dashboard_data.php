@@ -21,7 +21,7 @@ $data["overdue_count"] = (int)$res->fetch_assoc()["total"];
 
 // Fine revenue this month (from late/returned-late records)
 $res = $conn->query("
-    SELECT COALESCE(SUM(total_coast), 0) AS revenue
+    SELECT COALESCE(SUM(total_cost), 0) AS revenue
     FROM user_book_actions
     WHERE status = 3
     AND MONTH(returned_time) = MONTH(NOW())

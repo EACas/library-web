@@ -3,7 +3,7 @@ header("Content-Type: application/json");
 
 require_once "../core/database.php";
 
-$sql = "SELECT genre_id, genre FROM genres ORDER BY genre";
+$sql = "SELECT genre_id, genre FROM genres";
 
 $result = $conn->query($sql);
 
