@@ -83,5 +83,6 @@ function setupSearch(inputSelector, tableBodyId) {
 setupSearch('input[placeholder="Search admins..."]',     "adminTableBody");
 setupSearch('input[placeholder="Search librarians..."]', "librarianTableBody");
 setupSearch('input[placeholder="Search students..."]',   "studentTableBody");
+setupSearch('input[placeholder="Search by name or ID..."]', "studentTableBody");
 
 loadUsers();

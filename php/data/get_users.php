@@ -16,7 +16,6 @@ SELECT
 FROM users u
 JOIN roles r 
     ON u.role_id = r.role_id
-ORDER BY u.l_name, u.f_name
 ";
 
 $result = $conn->query($sql);

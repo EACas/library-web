@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Librarian — Library Operations</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../../styles/librarian_operations.css" />
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -29,27 +33,74 @@
     <div class="section">
       <h2>Process Borrow <em>&amp; Return</em></h2>
       <div class="transaction-box">
+
         <div class="form-group">
-          <label>Student ID or Name</label>
-          <input type="text" placeholder="e.g. STU-001 or John Doe" />
+          <label>Student</label>
+          <input type="text" id="studentSearch" placeholder="Search by name or ID..." autocomplete="off" />
+          <div id="studentDropdown" class="live-dropdown"></div>
+          <input type="hidden" id="selectedStudentId" />
+          <div id="selectedStudentCard" class="selected-card" style="display:none;">
+            <span id="selectedStudentLabel"></span>
+            <button type="button" class="clear-selection" onclick="clearStudent()">✕</button>
+          </div>
         </div>
+
         <div class="form-group">
-          <label>Book Title or ISBN</label>
-          <input type="text" placeholder="e.g. Meditations" />
+          <label>Book</label>
+          <input type="text" id="bookSearch" placeholder="Search by title..." autocomplete="off" />
+          <div id="bookDropdown" class="live-dropdown"></div>
+          <input type="hidden" id="selectedBookId" />
+          <div id="selectedBookCard" class="selected-card" style="display:none;">
+            <span id="selectedBookLabel"></span>
+            <button type="button" class="clear-selection" onclick="clearBook()">✕</button>
+          </div>
         </div>
+
         <div class="form-group">
           <label>Transaction Type</label>
-          <select><option>Borrow</option><option>Return</option></select>
+          <select id="transactionType">
+            <option value="borrow">Borrow</option>
+            <option value="return">Return</option>
+          </select>
         </div>
-        <div class="form-group">
+
+        <div class="form-group" id="dueDateGroup">
           <label>Due Date</label>
-          <input type="date" />
+          <input type="date" id="dueDate" />
         </div>
+
+        <div id="transactionMessage"></div>
+
         <div class="form-full form-btns">
-          <button class="btn btn-gold">Process Transaction</button>
-          <button class="btn btn-dark">Clear</button>
+          <button class="btn btn-gold" onclick="processTransaction()">Process Transaction</button>
+          <button class="btn btn-dark" onclick="clearTransaction()">Clear</button>
         </div>
       </div>
+    </div>
+
+    <!-- CURRENTLY BORROWED -->
+    <div class="section">
+      <h2>Currently <em>Borrowed</em></h2>
+      <div class="top-bar">
+        <input class="search-input" id="borrowedSearch" type="text" placeholder="Search by student or book..." />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Student</th>
+            <th>Student ID</th>
+            <th>Book</th>
+            <th>Borrowed On</th>
+            <th>Due Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="borrowedTableBody">
+          <tr>
+            <td colspan="6">Loading...</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <!-- RESERVATIONS -->
@@ -57,30 +108,17 @@
       <h2>Book <em>Reservations</em></h2>
       <table>
         <thead>
-          <tr><th>Student</th><th>Book</th><th>Reserved On</th><th>Status</th><th>Actions</th></tr>
+          <tr>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Reserved On</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
         </thead>
-        <tbody>
+        <tbody id="reservationsTableBody">
           <tr>
-            <td>John Doe</td><td>The Republic</td><td>Nov 10, 2024</td>
-            <td><span class="badge pending">Pending</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-green">Approve</button>
-              <button class="btn btn-red">Deny</button>
-            </div></td>
-          </tr>
-          <tr>
-            <td>Sara Khan</td><td>Sapiens</td><td>Nov 11, 2024</td>
-            <td><span class="badge approved">Approved</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">View</button>
-            </div></td>
-          </tr>
-          <tr>
-            <td>Tom Brown</td><td>Meditations</td><td>Nov 12, 2024</td>
-            <td><span class="badge denied">Denied</span></td>
-            <td><div class="action-btns">
-              <button class="btn btn-dark">View</button>
-            </div></td>
+            <td colspan="5">Loading...</td>
           </tr>
         </tbody>
       </table>
@@ -91,29 +129,33 @@
       <h2>Apply <em>Fines</em></h2>
       <table>
         <thead>
-          <tr><th>Student</th><th>Book</th><th>Reason</th><th>Days Late</th><th>Fine</th><th>Actions</th></tr>
-        </thead>
-        <tbody>
           <tr>
-            <td>John Doe</td><td>Meditations</td><td>Overdue</td><td>12</td><td>$6.00</td>
-            <td><button class="btn btn-gold">Apply Fine</button></td>
+            <th>Student</th>
+            <th>Book</th>
+            <th>Due Date</th>
+            <th>Days Late</th>
+            <th>Fine</th>
+            <th>Actions</th>
           </tr>
+        </thead>
+        <tbody id="finesTableBody">
           <tr>
-            <td>Maria Lopez</td><td>Sapiens</td><td>Damaged</td><td>—</td><td>$15.00</td>
-            <td><button class="btn btn-gold">Apply Fine</button></td>
+            <td colspan="6">Loading...</td>
           </tr>
         </tbody>
       </table>
     </div>
-<script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
-    crossorigin="anonymous"></script>
-  <script src="../../js/auth.js"></script>
-  <script>
-    // Only admins can access
-    initAuth([2]);
-  </script>
 
   </div>
 
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+    crossorigin="anonymous"></script>
+  <script src="../../js/auth.js"></script>
+  <script>
+    initAuth([2]);
+  </script>
+  <script src="../../js/librarian_operations.js"></script>
+
 </body>
+
 </html>

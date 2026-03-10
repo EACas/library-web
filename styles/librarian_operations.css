@@ -67,3 +67,53 @@
     .notif-text p  { font-size: 1rem; color: #f5efe6; margin-bottom: 4px; }
     .notif-text small { font-size: 0.8rem; color: #9c8e7a; }
     .notif-dot { width: 8px; height: 8px; background: #b8922a; border-radius: 50%; flex-shrink: 0; margin-left: 16px; }
+
+    .selected-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5f0e8;
+  border: 1px solid #c9a84c;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+.clear-selection {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 14px;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.clear-selection:hover {
+  color: #c0392b;
+}
+
+.live-dropdown {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background: #f5f0e8;
+}
+
+.dropdown-item.disabled {
+  color: #999;
+  cursor: default;
+}

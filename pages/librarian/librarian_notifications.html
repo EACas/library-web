@@ -13,10 +13,10 @@
   <div class="sidebar">
     <span class="logo">Book Library</span>
     <p class="role">Librarian Panel</p>
-    <a href="librarian-books.html">Book Management</a>
-    <a href="librarian-students.html">Student Accounts</a>
-    <a href="librarian-operations.html">Library Operations</a>
-    <a href="librarian-notifications.html" class="active">Notifications</a>
+    <a href="librarian_books.html">Book Management</a>
+    <a href="librarian_students.html">Student Accounts</a>
+    <a href="librarian_operations.html">Library Operations</a>
+    <a href="librarian_notifications.html" class="active">Notifications</a>
     <div class="logout"><a href="../../login.html">Log Out</a></div>
   </div>
 
@@ -35,83 +35,31 @@
     <!-- DUE DATE REMINDERS -->
     <div class="section">
       <h2>Due Date <em>Reminders</em></h2>
-      <p style="color:#9c8e7a; font-size:0.88rem; margin-bottom:16px;">
-        These are sent automatically when a borrowed book is due within 2 days.
-      </p>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Due date reminder sent to John Doe</p>
-          <small>Meditations — due in 2 days · Nov 13, 2024</small>
-        </div>
-        <div class="dot reminder"></div>
-      </div>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Due date reminder sent to Maria Lopez</p>
-          <small>Sapiens — due in 1 day · Nov 12, 2024</small>
-        </div>
-        <div class="dot reminder"></div>
-      </div>
+      <p class="section-desc">Books due within the next 2 days.</p>
+      <div id="remindersContainer">Loading...</div>
     </div>
 
     <!-- RESERVED BOOK NOW AVAILABLE -->
     <div class="section">
       <h2>Reserved Book <em>Available</em></h2>
-      <p style="color:#9c8e7a; font-size:0.88rem; margin-bottom:16px;">
-        These are sent automatically when a reserved book is returned and becomes available.
-      </p>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Reserved book now available — Sara Khan notified</p>
-          <small>Sapiens is now available · Nov 12, 2024</small>
-        </div>
-        <div class="dot available"></div>
-      </div>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Reserved book now available — Tom Brown notified</p>
-          <small>The Republic is now available · Nov 10, 2024</small>
-        </div>
-        <div class="dot available"></div>
-      </div>
+      <p class="section-desc">Approved reservations where the book is back in stock.</p>
+      <div id="availableContainer">Loading...</div>
     </div>
 
     <!-- OVERDUE NOTICES -->
     <div class="section">
       <h2>Overdue <em>Notices</em></h2>
-      <p style="color:#9c8e7a; font-size:0.88rem; margin-bottom:16px;">
-        These are sent automatically when a book passes its due date.
-      </p>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Overdue notice sent to James Lee</p>
-          <small>The Republic — 5 days overdue · Nov 11, 2024</small>
-        </div>
-        <div class="dot overdue"></div>
-      </div>
-
-      <div class="notif-item">
-        <div class="notif-text">
-          <p>Overdue notice sent to John Doe</p>
-          <small>Meditations — 12 days overdue · Nov 13, 2024</small>
-        </div>
-        <div class="dot overdue"></div>
-      </div>
+      <p class="section-desc">Books that have passed their due date and not yet returned.</p>
+      <div id="overdueContainer">Loading...</div>
     </div>
 
   </div>
 
-  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-4.0.0.js" integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U=" crossorigin="anonymous"></script>
   <script src="../../js/auth.js"></script>
   <script>
-    // Only admins can access
     initAuth([2]);
   </script>
+  <script src="../../js/librarian_notifications.js"></script>
 </body>
 </html>
