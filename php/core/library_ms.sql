@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2026 at 04:36 AM
+-- Generation Time: Mar 10, 2026 at 07:02 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,7 +62,11 @@ INSERT INTO `authors` (`author_id`, `author_name`) VALUES
 (3, 'J.R.R. Tolkien'),
 (4, 'Agatha Christie'),
 (5, 'test'),
-(6, 'test3');
+(6, 'test3'),
+(7, 'testing'),
+(8, 'testttt'),
+(9, 'asdadsa'),
+(10, 'test343');
 
 -- --------------------------------------------------------
 
@@ -84,13 +88,16 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`book_id`, `book_title`, `description`, `publish_date`, `price`, `stock`) VALUES
-(1, 'Harry Potter and the Philosopher\'s Stone', 'Fantasy novel', '1997-06-26', 15.99, 10),
-(2, '1984', 'Dystopian novel', '1949-06-08', 12.5, 7),
+(1, 'Harry Potter and the Philosopher\'s Stone', 'Fantasy novel', '1997-06-26', 15.99, 9),
+(2, '1984', 'Dystopian novel', '1949-06-08', 12.5, 6),
 (3, 'The Hobbit', 'Fantasy adventure', '1937-09-21', 14.75, 5),
-(4, 'Murder on the Orient Express', 'Detective novel', '1934-01-01', 11.2, 6),
+(4, 'Murder on the Orient Express', 'Detective novel', '1934-01-01', 11.2, 4),
 (5, 'test', 'sdasd', '2026-03-02', 23, 1),
 (6, 'test', 'asdadasdsqadas', '2026-03-02', 1, 2),
-(8, 'test', 'qweqweqe', '2026-03-02', 132, 3);
+(8, 'test', 'qweqweqe', '2026-03-02', 132, 2),
+(9, 'test', '', '1212-12-12', 123, 3),
+(10, 'book', 'adadadadadadada', '1111-11-11', 12334, 23),
+(11, 'testtttt', 'asdadad', '1234-12-12', 1313, 31);
 
 -- --------------------------------------------------------
 
@@ -104,6 +111,14 @@ CREATE TABLE `book_actions_books` (
   `book_id` int(11) NOT NULL,
   `book_condition_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `book_actions_books`
+--
+
+INSERT INTO `book_actions_books` (`book_action_books`, `user_book_actions__id`, `book_id`, `book_condition_id`) VALUES
+(1, 1, 2, 1),
+(2, 2, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -128,7 +143,10 @@ INSERT INTO `book_authors` (`book_author_id`, `book_id`, `author_id`) VALUES
 (4, 4, 4),
 (5, 5, 4),
 (6, 6, 1),
-(8, 8, 1);
+(8, 8, 1),
+(9, 9, 2),
+(10, 10, 7),
+(11, 11, 2);
 
 -- --------------------------------------------------------
 
@@ -192,7 +210,13 @@ INSERT INTO `book_genres` (`book_genre_id`, `book_id`, `genre_id`) VALUES
 (9, 8, 5),
 (10, 8, 2),
 (11, 8, 4),
-(12, 8, 3);
+(12, 8, 3),
+(13, 9, 5),
+(14, 9, 1),
+(15, 10, 2),
+(16, 10, 3),
+(17, 11, 2),
+(18, 11, 8);
 
 -- --------------------------------------------------------
 
@@ -206,6 +230,13 @@ CREATE TABLE `book_reservation_books` (
   `user_book_reservations_id` int(11) NOT NULL,
   `book_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `book_reservation_books`
+--
+
+INSERT INTO `book_reservation_books` (`book_reservation_book_id`, `date_reserved`, `user_book_reservations_id`, `book_id`) VALUES
+(1, '2026-03-10 07:00:45', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -318,7 +349,11 @@ INSERT INTO `genres` (`genre_id`, `genre`) VALUES
 (2, 'Dystopian'),
 (3, 'Science Fiction'),
 (4, 'Mystery'),
-(5, 'Detective');
+(5, 'Detective'),
+(6, 'test'),
+(7, 'asdasdada'),
+(8, 'asdad'),
+(9, 'asdasdadas');
 
 -- --------------------------------------------------------
 
@@ -333,6 +368,14 @@ CREATE TABLE `librarians` (
   `began_at` datetime NOT NULL,
   `account_balance` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `librarians`
+--
+
+INSERT INTO `librarians` (`librarian_id`, `user_id`, `salary`, `began_at`, `account_balance`) VALUES
+(1, 2, 1200, '2026-03-10 06:57:48', 0),
+(2, 5, 1200, '2026-03-10 06:59:39', 0);
 
 -- --------------------------------------------------------
 
@@ -356,7 +399,7 @@ CREATE TABLE `library` (
 --
 
 INSERT INTO `library` (`library_id`, `library_name`, `district_village`, `phone`, `email`, `allowed_borrowed_books`, `rate_day`, `is_open`) VALUES
-(1, 'Corozal Library', 1, '21234567', 'central@library.com', 5, 0.5, 1);
+(1, 'Corozal Library', 1, '6264246', 'corozal@lib.com', 8, 0.5, 1);
 
 -- --------------------------------------------------------
 
@@ -378,7 +421,7 @@ CREATE TABLE `opening_hours` (
 --
 
 INSERT INTO `opening_hours` (`opening_hour_id`, `library_id`, `from_day`, `to_day`, `start_hour`, `end_hour`) VALUES
-(1, 1, 1, 1, 8, 17);
+(1, 1, 1, 1, 2, 20);
 
 -- --------------------------------------------------------
 
@@ -434,6 +477,14 @@ CREATE TABLE `students` (
   `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`student_id`, `user_id`, `account_balance`, `created_at`) VALUES
+(1, 3, 0, '2026-03-10 06:58:23'),
+(2, 6, 0, '2026-03-10 07:00:02');
+
 -- --------------------------------------------------------
 
 --
@@ -450,7 +501,7 @@ CREATE TABLE `to_day` (
 --
 
 INSERT INTO `to_day` (`to_day_id`, `day_id`) VALUES
-(1, 5);
+(1, 7);
 
 -- --------------------------------------------------------
 
@@ -479,10 +530,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_library_id`, `email`, `f_name`, `l_name`, `phone_number`, `gender`, `password`, `dob`, `account_status`, `library_id`, `role_id`, `date_added`) VALUES
-(5, 'LIB69ac85c0dc536', 'admin@test.com', 'Luis', 'Mattu', '6264246', 1, '$2y$10$Wa9jZ6LEj4vyqgFx5/Ami.fU1K4RKLT3yk0y.J0A33ksffhpnq8SO', '2026-03-07 00:00:00', 1, 1, 1, '2026-03-07'),
-(6, 'LIB69ac86168ea68', 'librarian@test.com', 'Esmiri', 'Castillo', '6264246', 2, '$2y$10$Okog5CfTlgq7NBIgAmBw/e/2/tGfhzeGAjLkd7v.2JJhOh4FzLR6K', '2026-03-07 00:00:00', 1, 1, 2, '2026-03-07'),
-(7, 'LIB69ac864a2908d', 'student@test.com', 'Madelyn', 'Cunil', '6264246', 2, '$2y$10$YCD/S9iVC1rODbQMOHHUGes2PbVxtU00ssuOGhu6vO1nOHqF34mqC', '2026-03-07 00:00:00', 1, 1, 3, '2026-03-07'),
-(9, 'LIB69acd9b7166dc', 'student2@gmail.com', 'Daniel', 'Villanueva', '6264246', 1, '$2y$10$KpIhaqZy8HOOpyrqJgAqw.BT9Xh5/KGMgIn2CTsXNkfToZcB0UhZO', '0000-00-00 00:00:00', 1, 1, 3, '2026-03-07');
+(1, 'LIB5731c87c720f43b1', 'admin@gmail.com', 'Luis', 'Mattu', '6264246', 1, '$2y$10$zJr48UGNhVf/85tLpcPYl.B/6MpG3iHoeU.AouEI4C30P3Z/RJEyW', '2003-01-24 00:00:00', 1, 1, 1, '2026-03-09'),
+(2, 'LIB9bdad54ee8268142', 'librarian@gmail.com', 'Esmiri', 'Castillo', '6264246', 2, '$2y$10$r6IPEEy8oBhf7XIrdSULKej/moHcUc8Ss7ihO5TG1kbi/ke4T1kUC', '1111-11-11 00:00:00', 1, 1, 2, '2026-03-09'),
+(3, 'LIBc3a627a0d0899b7d', 'student@gmail.com', 'Madelyn', 'Cunil', '6264246', 2, '$2y$10$SFn3Qk32DMKdNauIXfP.teWHrjOgxINPpx4qWZli1U1RFQeDVTQf6', '1111-11-11 00:00:00', 1, 1, 3, '2026-03-09'),
+(4, 'LIB11fb627f7e6ec769', 'admin2@gmail.com', 'Daniel', 'Villanueva', '6264246', 1, '$2y$10$GaNtXNG8Zb1DdfaX4wOnPORdxrki8Cjk3Df3qHTi1Z3Ju96hKVxmG', '1111-11-11 00:00:00', 1, 1, 1, '2026-03-09'),
+(5, 'LIBcca212dd1001069c', 'librarian2@gmail.com', 'Keily', 'Cardenas', '6264246', 2, '$2y$10$xWj0MASvP9.BxMfDHJo9EOPrd6FVpolrWEzAHRI1l9N261kE7J4ci', '1111-11-11 00:00:00', 1, 1, 2, '2026-03-09'),
+(6, 'LIBf910b297cb4cb254', 'student2@gmail.com', 'Alvaro', 'Chan', '6264246', 1, '$2y$10$trsg6WJebxSwekmYPR/ZWOI0ToQOJBguPzxcwVTrlMX/ypqk0A5jW', '1111-11-11 00:00:00', 1, 1, 3, '2026-03-10');
 
 -- --------------------------------------------------------
 
@@ -498,9 +551,17 @@ CREATE TABLE `user_book_actions` (
   `due_date` datetime NOT NULL,
   `returned_time` datetime DEFAULT NULL,
   `net_cost` float NOT NULL,
-  `total_coast` float DEFAULT NULL,
+  `total_cost` decimal(10,2) DEFAULT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `user_book_actions`
+--
+
+INSERT INTO `user_book_actions` (`user_book_action_id`, `user_id`, `borrowed_time`, `action`, `due_date`, `returned_time`, `net_cost`, `total_cost`, `status`) VALUES
+(1, 3, '2026-03-10 07:00:39', 1, '2026-03-24 00:00:00', NULL, 7, NULL, 1),
+(2, 3, '2026-03-10 07:00:42', 1, '2026-03-24 00:00:00', NULL, 7, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -514,6 +575,13 @@ CREATE TABLE `user_book_reservations` (
   `reservation_cost` float NOT NULL,
   `reservation_status` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `user_book_reservations`
+--
+
+INSERT INTO `user_book_reservations` (`user_book_reservations`, `user_id`, `reservation_cost`, `reservation_status`) VALUES
+(1, 3, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -751,25 +819,25 @@ ALTER TABLE `account_status`
 -- AUTO_INCREMENT for table `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `books`
 --
 ALTER TABLE `books`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `book_actions_books`
 --
 ALTER TABLE `book_actions_books`
-  MODIFY `book_action_books` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `book_action_books` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `book_authors`
 --
 ALTER TABLE `book_authors`
-  MODIFY `book_author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `book_author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `book_conditions`
@@ -787,13 +855,13 @@ ALTER TABLE `book_condition_library_rate`
 -- AUTO_INCREMENT for table `book_genres`
 --
 ALTER TABLE `book_genres`
-  MODIFY `book_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `book_genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `book_reservation_books`
 --
 ALTER TABLE `book_reservation_books`
-  MODIFY `book_reservation_book_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `book_reservation_book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `days`
@@ -823,13 +891,13 @@ ALTER TABLE `from_days`
 -- AUTO_INCREMENT for table `genres`
 --
 ALTER TABLE `genres`
-  MODIFY `genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `genre_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `librarians`
 --
 ALTER TABLE `librarians`
-  MODIFY `librarian_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `librarian_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `library`
@@ -853,7 +921,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `to_day`
@@ -865,19 +933,19 @@ ALTER TABLE `to_day`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_book_actions`
 --
 ALTER TABLE `user_book_actions`
-  MODIFY `user_book_action_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_book_action_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_book_reservations`
 --
 ALTER TABLE `user_book_reservations`
-  MODIFY `user_book_reservations` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_book_reservations` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_district_village`
