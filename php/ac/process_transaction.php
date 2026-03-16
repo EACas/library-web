@@ -101,7 +101,7 @@ try {
 
         $stmt = $conn->prepare("
             UPDATE user_book_actions
-            SET status = ?, returned_time = ?, total_coast = ?, action = 2
+            SET status = ?, returned_time = ?, total_cost = ?, action = 2
             WHERE user_book_action_id = ?
         ");
         $stmt->bind_param("isdi", $status, $now, $total, $action_id);
